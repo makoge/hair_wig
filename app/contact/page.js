@@ -39,7 +39,7 @@ export default function ContactPage() {
                 id="message"
                 name="message"
                 placeholder="write something"
-                
+                rows={5}
               />
 
               <button type="submit" className="ctf-button">
