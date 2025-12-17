@@ -28,45 +28,91 @@ export default function Footer() {
       setMsg("Subscribed successfully!");
       setEmail("");
     } else {
-      const data = await res.json().catch(() => ({}));
       setStatus("error");
-      setMsg(data.error || "Something went wrong. Try again.");
+      setMsg("Something went wrong. Try again.");
     }
   }
 
   return (
     <footer className="main-footer">
       <div className="footer-grid">
+
+        {/* FIRST COLUMN */}
         <div className="first-footer">
           <h4>Join Confihair</h4>
 
-          <div className="subscribe" id="js-subscribe">
+          <div className="subscribe">
             <input
               type="email"
-              id="email-input"
               placeholder="enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && onSubscribe()}
             />
-            <button
-              className="subscribe-button"
-              onClick={onSubscribe}
-              disabled={status === "loading"}
-            >
+            <button onClick={onSubscribe} disabled={status === "loading"}>
               {status === "loading" ? "Sending..." : "Subscribe"}
             </button>
           </div>
 
-          {msg && (
-            <p className={`subscribe-msg ${status}`}>
-              {msg}
-            </p>
-          )}
+          {msg && <p className={`subscribe-msg ${status}`}>{msg}</p>}
 
-          {/* ...rest of footer */}
+          <div className="social-icons">
+            <a href="https://instagram.com" target="_blank" aria-label="instagram">
+              <i className="fab fa-instagram" />
+            </a>
+            <a href="https://x.com" target="_blank" aria-label="x">
+              <i className="fab fa-x" />
+            </a>
+            <a href="https://facebook.com" target="_blank" aria-label="facebook">
+              <i className="fab fa-facebook" />
+            </a>
+            <a href="https://youtube.com" target="_blank" aria-label="youtube">
+              <i className="fab fa-youtube" />
+            </a>
+          </div>
         </div>
+
+        {/* SECOND COLUMN */}
+        <div className="second-footer">
+          <h3>Help and Support</h3>
+          <ul>
+            <li><a href="#">Track my order</a></li>
+            <li><a href="#">Returns & Exchange</a></li>
+            <li><a href="#">Change & Cancel</a></li>
+            <li><a href="#">Customer Reviews</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+
+        {/* THIRD COLUMN */}
+        <div className="third-footer">
+          <h4>About Confida</h4>
+          <ul>
+            <li><a href="#">Our Values</a></li>
+            <li><a href="#">Innovation</a></li>
+            <li><a href="#">24 hours support</a></li>
+            <li><a href="#">Customer Reviews</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+
+        {/* FOURTH COLUMN */}
+        <div className="fourth-footer">
+          <h4>About Confida</h4>
+          <ul>
+            <li><a href="#">Our Values</a></li>
+            <li><a href="#">Innovation</a></li>
+            <li><a href="#">24 hours support</a></li>
+            <li><a href="#">Customer Reviews</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+
       </div>
+
+      {/* FIFTH COLUMN */}
+      <p className="fifth-footer">© CONFIDA 2025</p>
     </footer>
   );
 }
+
