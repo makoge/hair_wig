@@ -13,8 +13,8 @@ export async function POST(req) {
 
     // 1) email YOU
     await resend.emails.send({
-      from: process.env.FROM_EMAIL,          // e.g. "Confida <onboarding@resend.dev>" or your verified sender
-      to: process.env.ADMIN_EMAIL,           // your inbox
+      from: process.env.FROM_EMAIL,          
+      to: process.env.ADMIN_EMAIL,          
       subject: "New Confida subscriber",
       html: `<p>New subscriber: <b>${clean}</b></p>`,
     });

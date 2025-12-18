@@ -1,5 +1,5 @@
 "use client";
-
+import ContactForm from "../components/ContactForm";
 
 
 export default function ContactPage() {
@@ -20,36 +20,13 @@ export default function ContactPage() {
 
           <div className="right-contact">
             <h3>Contact us</h3>
-            <form
-              id="contact-form"
-            >
-              <label htmlFor="name">Name</label>
-              <input id="name" type="text" name="name" placeholder="enter your name" />
-
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="enter your email"
-              />
-
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="write something"
-                rows={5}
-              />
-
-              <button type="submit" className="ctf-button">
-                Send
-              </button>
+            <ContactForm/>
+            
               <div
                 id="form-status"
                 style={{ marginTop: 10, color: "#ff4081" }}
               />
-            </form>
+            
           </div>
         </section>
       </main>

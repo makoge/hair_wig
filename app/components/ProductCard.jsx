@@ -1,9 +1,16 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useCart } from "../context/CartContext";
 
-export default function ProductCard({ product, selectedColor, onSelectColor, onAddToCart }) {
+export default function ProductCard({ product }) {
+  const { addToCart } = useCart();
+
+  if (!product) return null;
+
   const {
+    id,
     name,
     price,
     badge,
@@ -15,8 +22,16 @@ export default function ProductCard({ product, selectedColor, onSelectColor, onA
     colorImages = {},
   } = product;
 
-  const activeColor = selectedColor || colors[0] || "";
-  const displayImg = (activeColor && colorImages[activeColor]) ? colorImages[activeColor] : image;
+  const defaultColor = useMemo(() => colors[0] || "", [colors]);
+  const [selectedColor, setSelectedColor] = useState(defaultColor);
+
+  const activeColor = selectedColor || defaultColor;
+  const displayImg =
+    activeColor && colorImages?.[activeColor] ? colorImages[activeColor] : image;
+
+  const handleAddToCart = () => {
+    addToCart(product, 1, activeColor); // ✅ matches your updated CartContext
+  };
 
   return (
     <article className="product-card">
@@ -41,11 +56,11 @@ export default function ProductCard({ product, selectedColor, onSelectColor, onA
           <div className="swatches">
             {colors.map((c) => (
               <button
-                key={c}
+                key={`${id}-${c}`}
                 type="button"
                 className={`swatch ${activeColor === c ? "selected" : ""}`}
                 style={{ backgroundColor: c }}
-                onClick={() => onSelectColor?.(product.id, c)}
+                onClick={() => setSelectedColor(c)}
                 aria-label={`Select color ${c}`}
               />
             ))}
@@ -53,7 +68,7 @@ export default function ProductCard({ product, selectedColor, onSelectColor, onA
         )}
 
         <div className="cart-actions">
-          <button className="btn-product" type="button" onClick={() => onAddToCart?.(product, activeColor)}>
+          <button className="btn-product" type="button" onClick={handleAddToCart}>
             Add to cart
           </button>
 

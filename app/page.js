@@ -1,10 +1,11 @@
 "use client";
 
-
+import { useEffect, useState } from "react";
 import HomeFeaturedProducts from "./components/HomeFeaturedProducts";
 import HomeReviews from "./components/HomeReviews";
 
  import Lightbox from "./components/Lightbox";
+ import ContactForm from "./components/ContactForm";
     export default function HomePage() {
              
       const scrollByCards = (dir) => {
@@ -12,6 +13,34 @@ import HomeReviews from "./components/HomeReviews";
      if (!track) return;
       track.scrollBy({ left: dir * 360, behavior: "smooth" });
         };
+
+        const allImages = [
+       "/img/img1.jpg",
+      "/img/img2.jpg",
+      "/img/img3.jpg",
+      "/img/img4.jpg",
+      "/img/img5.jpg",
+      "/img/img6.jpg",
+      "/img/img6.jpg",
+      "/img/img6.jpg",
+      "/img/img6.jpg",
+        ];
+
+    const [galleryImages, setGalleryImages] = useState(allImages);
+
+  useEffect(() => {
+  const mq = window.matchMedia("(max-width: 768px)");
+
+  const apply = () => {
+    setGalleryImages(mq.matches ? allImages.slice(0, 6) : allImages);
+  };
+
+  apply(); // run immediately
+  mq.addEventListener("change", apply);
+
+  return () => mq.removeEventListener("change", apply);
+}, []);
+
 
 
   return (
@@ -40,19 +69,8 @@ import HomeReviews from "./components/HomeReviews";
           <div className="left-gallery">
             <h2>Confida Gallery</h2>
             
-              <Lightbox
-              images={[
-                "/img/img1.jpg",
-                "/img/img2.jpg",
-                "/img/img3.jpg",
-                "/img/img4.jpg",
-                "/img/img5.jpg",
-                "/img/img6.jpg",
-                "/img/img6.jpg",
-                "/img/img6.jpg",
-                "/img/img6.jpg",
-              ]}
-            />
+              <Lightbox images={galleryImages} />
+
             </div>
           
 
@@ -191,36 +209,9 @@ import HomeReviews from "./components/HomeReviews";
 
           <div className="right-contact">
             <h3>Contact us</h3>
-            <form
-              id="contact-form"
-            >
-              <label htmlFor="name">Name</label>
-              <input id="name" type="text" name="name" placeholder="enter your name" />
-
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="enter your email"
-              />
-
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="write something"
-                rows={5}
-              />
-
-              <button type="submit" className="ctf-button">
-                Send
-              </button>
-              <div
-                id="form-status"
-                style={{ marginTop: 10, color: "#ff4081" }}
-              />
-            </form>
+            
+             <ContactForm/>
+          
           </div>
         </section>
       </main>

@@ -1,4 +1,5 @@
 import ProductCard from "./ProductCard";
+import HomeFeaturedProducts from "./HomeFeaturedProducts";
 
 export default function RelatedProducts({ current, products }) {
   const related = products

@@ -39,7 +39,7 @@ export default function Footer() {
 
         {/* FIRST COLUMN */}
         <div className="first-footer">
-          <h4>Join Confihair</h4>
+          <h4>Join Confidahair</h4>
 
           <div className="subscribe">
             <input

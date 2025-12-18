@@ -19,37 +19,63 @@ export default function CartPage() {
       ) : (
         <div className="cart-layout">
           <div className="cart-list">
-            {items.map(({ id, qty, product }) => (
-              <div key={id} className="cart-item">
-                <div className="cart-thumb">
-                  <Image
-                    src={product.image || "/img/img1.jpg"}
-                    width={96}
-                    height={96}
-                    alt={product.name}
-                  />
-                </div>
+            {items.map(({ variantKey, qty, selectedColor, product }) => {
+              const img =
+                (selectedColor && product.colorImages?.[selectedColor]) ||
+                product.image ||
+                "/img/img1.jpg";
 
-                <div className="cart-info">
-                  <div className="item-title">{product.name}</div>
-                  <div className="item-meta">€{Number(product.price).toFixed(2)}</div>
+              return (
+                <div key={variantKey} className="cart-item">
+                  <div className="cart-thumb">
+                    <Image src={img} width={96} height={96} alt={product.name} />
+                  </div>
 
-                  <div className="qty-row">
-                    <button className="qty-btn" onClick={() => updateQty(id, qty - 1)} type="button">−</button>
-                    <span className="qty-value">{qty}</span>
-                    <button className="qty-btn" onClick={() => updateQty(id, qty + 1)} type="button">+</button>
+                  <div className="cart-info">
+                    <div className="item-title">{product.name}</div>
+                    <div className="item-meta">€{Number(product.price).toFixed(2)}</div>
 
-                    <button className="btn-remove" onClick={() => removeFromCart(id)} type="button">
-                      Remove
-                    </button>
+                    {selectedColor && (
+                      <div className="item-meta">
+                        Color: <strong>{selectedColor}</strong>
+                      </div>
+                    )}
+
+                    <div className="qty-row">
+                      <button
+                        className="qty-btn"
+                        onClick={() => updateQty(variantKey, qty - 1)}
+                        type="button"
+                      >
+                        −
+                      </button>
+
+                      <span className="qty-value">{qty}</span>
+
+                      <button
+                        className="qty-btn"
+                        onClick={() => updateQty(variantKey, qty + 1)}
+                        type="button"
+                      >
+                        +
+                      </button>
+
+                      <button
+                        className="btn-remove"
+                        onClick={() => removeFromCart(variantKey)}
+                        type="button"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="item-total">
+                    €{(Number(product.price) * qty).toFixed(2)}
                   </div>
                 </div>
-
-                <div className="item-total">
-                  €{(Number(product.price) * qty).toFixed(2)}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <aside className="cart-summary">
@@ -68,9 +94,7 @@ export default function CartPage() {
             </button>
 
             <Link href="/checkout" className="btn-checkout">Checkout</Link>
-            <Link href="/shop" className="cart-link">
-              Continue shopping →
-            </Link>
+            <Link href="/shop" className="cart-link">Continue shopping →</Link>
           </aside>
         </div>
       )}

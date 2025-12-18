@@ -5,6 +5,7 @@ import Reviews from "@/app/components/Reviews";
 import RelatedProducts from "@/app/components/RelatedProducts";
 import ProductDetailsClient from "@/app/components/ProductDetailsClient";
 
+
 export default async function ProductDetailsPage({ params }) {
   // fixes your “params is a Promise” issue on some setups
   const p = params?.then ? await params : params;

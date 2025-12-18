@@ -16,7 +16,7 @@ function safeParse(json, fallback) {
 }
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([]); // [{ id, qty, product }]
+  const [items, setItems] = useState([]); // [{ id, variantKey, selectedColor, qty, product }]
 
   // ✅ Load once on first mount
   useEffect(() => {
@@ -32,28 +32,44 @@ export function CartProvider({ children }) {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addToCart = (product, qty = 1) => {
-    if (!product?.id) return;
+  const addToCart = (product, qty = 1, selectedColor = "") => {
+  if (!product?.id) return;
 
-    setItems((prev) => {
-      const existing = prev.find((x) => x.id === product.id);
-      if (existing) {
-        return prev.map((x) =>
-          x.id === product.id ? { ...x, qty: x.qty + qty } : x
-        );
-      }
-      return [...prev, { id: product.id, qty, product }];
-    });
-  };
+  const variantKey = `${product.id}:${selectedColor || ""}`;
 
-  const updateQty = (id, qty) => {
-    setItems((prev) => {
-      if (qty <= 0) return prev.filter((x) => x.id !== id);
-      return prev.map((x) => (x.id === id ? { ...x, qty } : x));
-    });
-  };
+  setItems((prev) => {
+    const existing = prev.find((x) => x.variantKey === variantKey);
 
-  const removeFromCart = (id) => setItems((prev) => prev.filter((x) => x.id !== id));
+    if (existing) {
+      return prev.map((x) =>
+        x.variantKey === variantKey ? { ...x, qty: x.qty + qty } : x
+      );
+    }
+
+    return [
+      ...prev,
+      {
+        id: product.id,
+        variantKey,
+        selectedColor,
+        qty,
+        product: { ...product, selectedColor }, // optional but handy
+      },
+    ];
+  });
+};
+
+
+  const updateQty = (variantKey, qty) => {
+  setItems((prev) => {
+    if (qty <= 0) return prev.filter((x) => x.variantKey !== variantKey);
+    return prev.map((x) => (x.variantKey === variantKey ? { ...x, qty } : x));
+  });
+};
+
+const removeFromCart = (variantKey) =>
+  setItems((prev) => prev.filter((x) => x.variantKey !== variantKey));
+
   const clearCart = () => setItems([]);
 
   const cartCount = useMemo(

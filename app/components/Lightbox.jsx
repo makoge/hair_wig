@@ -103,6 +103,8 @@ export default function Lightbox({ images = [] }) {
               alt="expanded"
             />
 
+            
+
             {/* RIGHT ARROW */}
             <span className="lightbox-arrow right" onClick={showNext}>
               ❯
