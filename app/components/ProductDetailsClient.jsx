@@ -6,26 +6,28 @@ import { useCart } from "@/app/context/CartContext";
 export default function ProductDetailsClient({ product }) {
   const { addToCart } = useCart();
 
-  const colors = useMemo(() => product.colors || [], [product.colors]);
-  const [qty, setQty] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(colors[0] || "");
+  if (!product) return null;
 
+  const colors = useMemo(() => product.colors || [], [product]);
   const inStock = !!product.inStock;
 
-  const clampQty = (n) => Math.max(1, Math.min(99, n));
+  const [selectedColor, setSelectedColor] = useState(() => colors[0] || "");
+  const [qty, setQty] = useState(1);
+
+  const clampQty = (n) => {
+    const num = Number(n);
+    if (!Number.isFinite(num)) return 1;
+    return Math.max(1, Math.min(99, Math.floor(num)));
+  };
+
   const dec = () => setQty((q) => clampQty(q - 1));
   const inc = () => setQty((q) => clampQty(q + 1));
 
   const handleAdd = () => {
     if (!inStock) return;
 
-    addToCart(
-      {
-        ...product,
-        selectedColor, // keep your option stored in cart item
-      },
-      qty
-    );
+    // ✅ matches your CartContext signature: (product, qty, selectedColor)
+    addToCart(product, qty, selectedColor);
   };
 
   const handleBuyNow = () => {
@@ -54,6 +56,13 @@ export default function ProductDetailsClient({ product }) {
                 />
               ))}
             </div>
+
+            {/* Optional: show picked color */}
+            {selectedColor && (
+              <div className="pd-selected">
+                Selected: <span className="pd-chip">{selectedColor}</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -68,7 +77,7 @@ export default function ProductDetailsClient({ product }) {
             <input
               className="pd-qtyinput"
               value={qty}
-              onChange={(e) => setQty(clampQty(Number(e.target.value || 1)))}
+              onChange={(e) => setQty(clampQty(e.target.value))}
               inputMode="numeric"
               aria-label="Quantity"
               disabled={!inStock}
@@ -90,13 +99,6 @@ export default function ProductDetailsClient({ product }) {
             Buy now
           </button>
         </div>
-
-        {/* Optional: show picked color */}
-        {selectedColor && (
-          <div className="pd-selected">
-            Selected: <span className="pd-chip">{selectedColor}</span>
-          </div>
-        )}
       </div>
 
       {/* STICKY MOBILE BAR */}

@@ -5,9 +5,43 @@ import Reviews from "@/app/components/Reviews";
 import RelatedProducts from "@/app/components/RelatedProducts";
 import ProductDetailsClient from "@/app/components/ProductDetailsClient";
 
+export async function generateMetadata({ params }) {
+  const p = params?.then ? await params : params;
+  const slug = p?.slug;
+
+  const product = products.find((x) => x.slug === slug);
+  if (!product) return {};
+
+  const title = `${product.name} | Confida Hair`;
+  const description =
+    product.seoDescription ||
+    `${product.name} by Confida Hair. Premium quality, natural look, comfortable fit. Fast delivery in Europe.`;
+
+  const images = (product.images?.length ? product.images : [product.image])
+    .filter(Boolean)
+    .map((src) => ({ url: src }));
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/products/${product.slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "product",
+      url: `/products/${product.slug}`,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: images[0]?.url ? [images[0].url] : [],
+    },
+  };
+}
 
 export default async function ProductDetailsPage({ params }) {
-  // fixes your “params is a Promise” issue on some setups
   const p = params?.then ? await params : params;
   const slug = p?.slug;
 
@@ -17,14 +51,17 @@ export default async function ProductDetailsPage({ params }) {
   const imgs = product.images?.length ? product.images : [product.image];
   const price = Number(product.price || 0);
 
-  // SEO JSON-LD (simple + effective)
+  // ✅ Product JSON-LD (Google loves this)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     image: imgs,
-    sku: product.id,
-    brand: { "@type": "Brand", name: "Confida" },
+    sku: String(product.id),
+    brand: { "@type": "Brand", name: "Confida Hair" },
+    description:
+      product.seoDescription ||
+      `Buy ${product.name} from Confida Hair. Premium hair, natural look, comfortable fit, easy styling.`,
     offers: {
       "@type": "Offer",
       priceCurrency: "EUR",
@@ -32,19 +69,8 @@ export default async function ProductDetailsPage({ params }) {
       availability: product.inStock
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
-      url: `/products/${product.slug}`,
+      url: `https://confida.shop/products/${product.slug}`, // ✅ use your real domain
     },
-    aggregateRating: product.reviews?.length
-      ? {
-          "@type": "AggregateRating",
-          ratingValue:
-            (
-              product.reviews.reduce((s, r) => s + (r.rating || 0), 0) /
-              product.reviews.length
-            ).toFixed(1),
-          reviewCount: product.reviews.length,
-        }
-      : undefined,
   };
 
   return (
@@ -75,17 +101,22 @@ export default async function ProductDetailsPage({ params }) {
           <ProductDetailsClient product={product} />
 
           <div className="pd-desc">
-            <h3>Details</h3>
+            <h2>Product details</h2>
             <p>
-              Premium hair, natural look, comfortable fit, easy styling. (Add a longer unique
-              paragraph here for SEO — it helps.)
+              {product.description ||
+                `Premium quality hair with a natural finish. Comfortable cap, easy styling, and long-lasting wear. Perfect for everyday confidence.`}
             </p>
           </div>
         </div>
       </section>
 
-      <Reviews product={product} />
-      <RelatedProducts current={product} products={products} />
+      <section aria-label="Customer reviews">
+        <Reviews product={product} />
+      </section>
+
+      <section aria-label="Related products">
+        <RelatedProducts current={product} products={products} />
+      </section>
     </main>
   );
 }
