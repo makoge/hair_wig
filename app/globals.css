@@ -1138,6 +1138,7 @@ header.scrolled {
 }
 /*REVIEWS*/
 .pd-wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+.pd-wrap h2{text-align: center; color: rgb(54, 52, 52);margin-bottom: 5px;}
 .pd-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: start; }
 .pd-info { background: rgb(54,52,52); border-radius: var(--radius); padding: 16px; }
 .pd-title { font-size: 28px; margin-bottom: 8px; }
@@ -1159,6 +1160,18 @@ header.scrolled {
 
 .rel-wrap { margin-top: 28px; }
 .rel-title { margin: 0 0 12px; }
+.reviews-wrap { margin-top: 2rem; }
+.review-card { background: #2f2f2f; border-radius: 16px; padding: 14px; color: #fff; }
+.input, .textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #fff;
+  border-radius: 14px;
+  background: rgb(54,52,52);
+  color: #fff;
+  font-family: inherit;
+}
+
 
 @media (max-width: 900px){
   .pd-grid { grid-template-columns: 1fr; }
@@ -1245,6 +1258,7 @@ header.scrolled {
   width: 150px;
   font-size: 1rem;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 .contact-page{
   background-color: #222;
@@ -1681,7 +1695,7 @@ header.scrolled {
   .sc-track{
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 54px) / 1);
+  grid-auto-columns: calc((100% - 60px) / 1);
   
 }
   .footer-grid{
@@ -1699,5 +1713,6 @@ header.scrolled {
     display: grid;
     grid-template-columns: 1fr;
   }
+  
 
 }

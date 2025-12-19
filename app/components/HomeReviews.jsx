@@ -18,13 +18,13 @@ export default function HomeReviews() {
   if (!latest.length) return null;
 
   return (
-    <section className="capture" aria-label="customer reviews">
+    <section className="pd-wrap" aria-label="customer reviews">
       <h2>Customer Reviews</h2>
 
-      <div className="capture-cards">
+      <div className="pd-grid">
         {latest.map((r) => (
-          <div className="capture-card" key={`${r.product.id}-${r.id}`}>
-            <div className="card-header" style={{ justifyContent: "space-between" }}>
+          <div className="pd-info" key={`${r.product.id}-${r.id}`}>
+            <div className="" style={{ justifyContent: "space-between" }}>
               <h3 style={{ margin: 0 }}>{r.title}</h3>
               <span style={{ opacity: 0.9 }}>
                 <Stars rating={r.rating} />
