@@ -1,9 +1,9 @@
-import {products} from "@/data/products";
+import { products } from "@/data/products";
 
 export default function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://confida.shop";
 
-  const productUrls= products.map(p =>({
+  const productUrls = (products || []).map((p) => ({
     url: `${baseUrl}/products/${p.slug}`,
     lastModified: new Date(),
   }));
@@ -18,8 +18,7 @@ export default function sitemap() {
     {
       url: `${baseUrl}/shop`,
       lastModified: new Date(),
-    }
-
-      ...productUrls,
+    },
+    ...productUrls,
   ];
 }
