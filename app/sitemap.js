@@ -1,4 +1,4 @@
-import { products } from "@/data/products";
+import { products } from "./data/products";
 
 export default function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://confida.shop";
