@@ -24,7 +24,8 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
-    alternates: { canonical: `/products/${product.slug}` },
+   alternates: { canonical: `https://confida.shop/products/${product.slug}` },
+
     openGraph: {
       title,
       description,
@@ -69,7 +70,8 @@ export default async function ProductDetailsPage({ params }) {
       availability: product.inStock
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
-      url: `https://confida.shop/products/${product.slug}`, // ✅ use your real domain
+      url: `https://confida.shop/products/${product.slug}`, 
+      priceValidUntil: "2027-12-31",
     },
   };
 
@@ -84,6 +86,37 @@ export default async function ProductDetailsPage({ params }) {
         <div>
           <Lightbox images={imgs} />
         </div>
+  <div className="pd-det">
+  <h2>Product details</h2>
+
+  <p>
+    {product.pageDescription ||
+      `${product.name} by Confida Hair. Designed for a natural scalp appearance, comfortable daily wear, and effortless styling. Ideal for anyone looking for a realistic, premium wig.`}
+  </p>
+
+  {!!product.highlights?.length && (
+    <>
+      <h3>Key features</h3>
+      <ul>
+        {product.highlights.map((x, i) => (
+          <li key={i}>{x}</li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {!!product.care?.length && (
+    <>
+      <h3>Care instructions</h3>
+      <ul>
+        {product.care.map((x, i) => (
+          <li key={i}>{x}</li>
+        ))}
+      </ul>
+    </>
+  )}
+</div>
+
 
         <div className="pd-info">
           <h1 className="pd-title">{product.name}</h1>
@@ -101,7 +134,7 @@ export default async function ProductDetailsPage({ params }) {
           <ProductDetailsClient product={product} />
 
           <div className="pd-desc">
-            <h2>Product details</h2>
+            <h2>Product description</h2>
             <p>
               {product.description ||
                 `Premium quality hair with a natural finish. Comfortable cap, easy styling, and long-lasting wear. Perfect for everyday confidence.`}

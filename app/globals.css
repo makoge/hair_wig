@@ -1108,9 +1108,14 @@ header.scrolled {
   background: var(--brand);
   color: #111;
 }
+.pd-det{
+  margin-top: 16px;
+  color: black;
+  line-height: 1.6;
+}
 .pd-desc{
   margin-top: 16px;
-  color: #fff;
+  color: white;
 }
 .pd-desc h3{ margin-bottom: 8px; }
 
@@ -1307,6 +1312,9 @@ header.scrolled {
 }
 
 /*DETAILSPAGE*/
+.pd-option{
+  margin-bottom: 10px;
+}
 .pd-cta{
   padding: 0.5rem 0.5rem;
   margin-right: 0.2rem;
@@ -1317,7 +1325,7 @@ header.scrolled {
   border-radius: var(--radius);
 }
 .pd-stickyBtn{
-   padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   margin-top: 0.2rem;
   border-radius: var(--radius);
 }

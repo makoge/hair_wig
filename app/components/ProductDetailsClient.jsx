@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useCart } from "@/app/context/CartContext";
+import Link from "next/link";
 
 export default function ProductDetailsClient({ product }) {
   const { addToCart } = useCart();
@@ -103,10 +104,11 @@ export default function ProductDetailsClient({ product }) {
 
       {/* STICKY MOBILE BAR */}
       <div className="pd-sticky">
-        <div className="pd-stickyPrice">€{price}</div>
-        <button className="pd-stickyBtn" onClick={handleAdd} disabled={!inStock}>
-          Add to cart
-        </button>
+        
+        
+        <Link className="pd-cta ghost" href="/shop">
+            Continue shopping
+          </Link>
       </div>
     </>
   );
