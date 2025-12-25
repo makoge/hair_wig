@@ -72,6 +72,44 @@ export default async function ProductDetailsPage({ params }) {
         : "https://schema.org/OutOfStock",
       url: `https://confida.shop/products/${product.slug}`, 
       priceValidUntil: "2027-12-31",
+      itemCondition: "https://schema.org/NewCondition",
+
+  shippingDetails: [
+    {
+      "@type": "OfferShippingDetails",
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: [
+          "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT",
+          "LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE"
+        ],
+      },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: {
+          "@type": "QuantitativeValue",
+          minValue: 1,
+          maxValue: 2,
+          unitCode: "d",
+        },
+        transitTime: {
+          "@type": "QuantitativeValue",
+          minValue: 2,
+          maxValue: 7,
+          unitCode: "d",
+        },
+      },
+    },
+  ],
+
+  hasMerchantReturnPolicy: {
+    "@type": "MerchantReturnPolicy",
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 14,
+    returnMethod: "https://schema.org/ReturnByMail",
+    // set this to what you actually do:
+    returnFees: "https://schema.org/FreeReturn",
+  },
     },
   };
 

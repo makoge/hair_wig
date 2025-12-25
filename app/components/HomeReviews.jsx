@@ -40,11 +40,28 @@ export default function HomeReviews() {
       .filter((r) => r.product); // only show if product exists
   }, [reviews]);
 
-  if (err) return null;
-  if (!latest.length) return null;
+  if (err) {
+  return (
+    <section id="reviews" className="pd-wrap" aria-label="customer reviews">
+      <h2>Customer Reviews</h2>
+      <p style={{ opacity: 0.8 }}>Reviews unavailable right now.</p>
+      <p style={{ opacity: 0.6, fontSize: 12 }}>{err}</p>
+    </section>
+  );
+}
+
+if (!latest.length) {
+  return (
+    <section id="reviews" className="pd-wrap" aria-label="customer reviews">
+      <h2>Customer Reviews</h2>
+      <p style={{ opacity: 0.8 }}>No reviews yet.</p>
+    </section>
+  );
+}
+
 
   return (
-    <section className="pd-wrap" aria-label="customer reviews">
+    <section  id="reviews" className="pd-wrap" aria-label="customer reviews">
       <h2>Customer Reviews</h2>
 
       <div className="pd-grid">

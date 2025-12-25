@@ -151,8 +151,7 @@ export default function HomeClient() {
                 <h3>Trusted brand</h3>
               </div>
               <p>
-                our customers are saying good things about us, check our
-                testimonials.
+                our customers are saying good things about us, reviews.
               </p>
             </div>
           </div>
@@ -170,9 +169,10 @@ export default function HomeClient() {
           <button className="sc-nav sc-next" onClick={() => scrollByCards(1)} aria-label="next">›</button>
           </div>
      </section>
-
+       
           <HomeReviews />
-
+       
+          
         {/* QUICK BUY SECTION */}
         <section className="quick-buy">
           <div className="qb-item qb-left">

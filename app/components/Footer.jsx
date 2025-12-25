@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -77,10 +78,10 @@ export default function Footer() {
           <h3>Help and Support</h3>
           <ul>
             <li><a href="#">Track my order</a></li>
-            <li><a href="#">Returns & Exchange</a></li>
-            <li><a href="#">Change & Cancel</a></li>
-            <li><a href="#">Customer Reviews</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="/returns">Returns & Exchange</a></li>
+            <li><a href="/returns">Change & Cancel</a></li>
+            <li><Link href="/#reviews">Customer Reviews</Link></li>
+            <li><a href="/contact">FAQ</a></li>
           </ul>
         </div>
 
@@ -90,9 +91,9 @@ export default function Footer() {
           <ul>
             <li><a href="#">Our Values</a></li>
             <li><a href="#">Innovation</a></li>
-            <li><a href="#">24 hours support</a></li>
-            <li><a href="#">Customer Reviews</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="/contact">24 hours support</a></li>
+            <li><Link href="/#reviews">Customer Reviews</Link></li>
+            <li><a href="/contact">FAQ</a></li>
           </ul>
         </div>
 
@@ -102,9 +103,9 @@ export default function Footer() {
           <ul>
             <li><a href="#">Our Values</a></li>
             <li><a href="#">Innovation</a></li>
-            <li><a href="#">24 hours support</a></li>
-            <li><a href="#">Customer Reviews</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="/contact">24 hours support</a></li>
+            <li><Link href="/#reviews">Customer Reviews</Link></li>
+            <li><a href="/contact">FAQ</a></li>
           </ul>
         </div>
 
