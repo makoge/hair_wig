@@ -17,14 +17,14 @@ export default function HomeClient() {
 
         const allImages = [
        "/img/img1.jpg",
-      "/img/img2.jpg",
-      "/img/img3.jpg",
-      "/img/img4.jpg",
+      "/img/hair-wig-confida.jpg",
+      "/img/premium-human-hair.jpg",
+      "/img/human-hair-in-colors.jpg",
       "/img/img5.jpg",
       "/img/img6.jpg",
-      "/img/img6.jpg",
-      "/img/img6.jpg",
-      "/img/img6.jpg",
+      "/img/confida-hair-wig.jpg",
+      "/img/straight-hair-wig.jpg",
+      "/img/hair-wigs.jpg",
         ];
 
     const [galleryImages, setGalleryImages] = useState(allImages);
