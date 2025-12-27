@@ -3,17 +3,15 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "../context/CartContext";
+import { useLocale, useTranslations } from "next-intl";
+
+import { useCart } from "@/app/context/CartContext";
 import { products } from "@/app/data/products";
 
-const LABELS = {
-  human: "Human Hair",
-  lace: "Lace Wig",
-  monofilament: "Monofilament",
-  accessories: "Accessories",
-};
-
 export default function Header() {
+  const t = useTranslations("header");
+  const locale = useLocale();
+
   const { cartCount } = useCart();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,6 +26,14 @@ export default function Header() {
     setSubmenuOpen(false);
   };
 
+  // translated category labels
+  const LABELS = {
+    human: t("catHuman"),
+    lace: t("catLace"),
+    monofilament: t("catMono"),
+    accessories: t("catAccessories")
+  };
+
   return (
     <header>
       {/* LEFT LOGO */}
@@ -36,8 +42,8 @@ export default function Header() {
           src="/img/hair_logo.png"
           width={60}
           height={50}
-          alt="Confida logo"
-          onClick={() => (window.location.href = "/")}
+          alt={t("logoAlt")}
+          onClick={() => (window.location.href = `/${locale}`)}
           style={{ cursor: "pointer" }}
           priority
         />
@@ -47,8 +53,9 @@ export default function Header() {
       <div className="mobile-menu-wrapper">
         <button
           className="menu-toggle"
-          aria-label="Toggle menu"
+          aria-label={t("toggleMenu")}
           onClick={() => setMenuOpen((v) => !v)}
+          type="button"
         >
           ☰
         </button>
@@ -56,21 +63,21 @@ export default function Header() {
         <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
           <ul>
             <li>
-              <Link href="/" onClick={closeMenu}>
-                Home
+              <Link href={`/${locale}`} onClick={closeMenu}>
+                {t("home")}
               </Link>
             </li>
 
             {/* DROPDOWN */}
             <li className="dropdown">
               <div className="submenu-wrapper">
-                <Link href="/shop" className="dropbtn" onClick={closeMenu}>
-                  Products
+                <Link href={`/${locale}/shop`} className="dropbtn" onClick={closeMenu}>
+                  {t("products")}
                 </Link>
 
                 <button
                   className="submenu-toggle"
-                  aria-label="Toggle product categories"
+                  aria-label={t("toggleCategories")}
                   onClick={() => setSubmenuOpen((v) => !v)}
                   type="button"
                 >
@@ -82,7 +89,7 @@ export default function Header() {
                 <ul>
                   {categories.map((cat) => (
                     <li key={cat}>
-                      <Link href={`/categories/${cat}`} onClick={closeMenu}>
+                      <Link href={`/${locale}/categories/${cat}`} onClick={closeMenu}>
                         {LABELS[cat] ?? cat}
                       </Link>
                     </li>
@@ -92,14 +99,14 @@ export default function Header() {
             </li>
 
             <li>
-              <Link href="/treat_wig" onClick={closeMenu}>
-                Treat wig
+              <Link href={`/${locale}/treat_wig`} onClick={closeMenu}>
+                {t("treatWig")}
               </Link>
             </li>
 
             <li>
-              <Link href="/contact" onClick={closeMenu}>
-                Contact
+              <Link href={`/${locale}/contact`} onClick={closeMenu}>
+                {t("contact")}
               </Link>
             </li>
           </ul>
@@ -108,15 +115,17 @@ export default function Header() {
 
       {/* RIGHT SIDE */}
       <div className="header-right">
-        <Link className="bts" href="/cart" onClick={closeMenu}>
-          cart({cartCount})
+        <Link className="bts" href={`/${locale}/cart`} onClick={closeMenu}>
+          {t("cart")} ({cartCount})
         </Link>
 
-        <button type="button" onClick={() => (window.location.href = "/contact")}>
-          contact us
+        <button type="button" onClick={() => (window.location.href = `/${locale}/contact`)}>
+          {t("contactUs")}
         </button>
       </div>
     </header>
   );
 }
+
+
 

@@ -2,11 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { useCart } from "../context/CartContext";
+import { useLocale, useTranslations } from "next-intl";
+
+import { useCart } from "@/app/context/CartContext";
 
 export default function CheckoutPage() {
-  const { items, cartCount, cartTotal, clearCart } = useCart();
+  const t = useTranslations("checkout");
+  const locale = useLocale();
 
+  const { items, cartCount, cartTotal, clearCart } = useCart();
   const total = useMemo(() => Number(cartTotal || 0), [cartTotal]);
 
   const [loading, setLoading] = useState(false);
@@ -20,7 +24,7 @@ export default function CheckoutPage() {
     address: "",
     city: "",
     country: "",
-    notes: "",
+    notes: ""
   });
 
   const onChange = (e) => {
@@ -30,9 +34,10 @@ export default function CheckoutPage() {
 
   const placeOrder = async () => {
     setErr("");
-    if (items.length === 0) return setErr("Your cart is empty.");
+
+    if (items.length === 0) return setErr(t("errEmptyCart"));
     if (!customer.name.trim() || !customer.email.trim())
-      return setErr("Name and email are required.");
+      return setErr(t("errNameEmail"));
 
     setLoading(true);
     try {
@@ -42,17 +47,17 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           customer,
           items,
-          totals: { total, cartCount },
-        }),
+          totals: { total, cartCount }
+        })
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || "Checkout failed");
+      if (!res.ok) throw new Error(data?.error || t("errCheckoutFailed"));
 
       setOrderId(data.orderId);
       clearCart();
     } catch (e) {
-      setErr(e.message || "Checkout failed");
+      setErr(e.message || t("errCheckoutFailed"));
     } finally {
       setLoading(false);
     }
@@ -63,14 +68,14 @@ export default function CheckoutPage() {
     return (
       <main className="checkout">
         <div className="checkout-wrap">
-          <h1>Order placed ✅</h1>
+          <h1>{t("successTitle")}</h1>
           <p className="muted">
-            Order ID: <strong>{orderId}</strong>
+            {t("orderId")}: <strong>{orderId}</strong>
           </p>
-          <p className="muted">We sent a confirmation email to {customer.email}.</p>
+          <p className="muted">{t("emailSent", { email: customer.email })}</p>
 
-          <Link className="btn-checkout" href="/shop">
-            Continue shopping
+          <Link className="btn-checkout" href={`/${locale}/shop`}>
+            {t("continueShopping")}
           </Link>
         </div>
       </main>
@@ -81,10 +86,10 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <main className="checkout">
-        <h1>Checkout</h1>
-        <p>Your cart is empty.</p>
-        <Link className="btn-checkout" href="/shop">
-          Go to shop
+        <h1>{t("title")}</h1>
+        <p>{t("emptyCart")}</p>
+        <Link className="btn-checkout" href={`/${locale}/shop`}>
+          {t("goToShop")}
         </Link>
       </main>
     );
@@ -93,16 +98,18 @@ export default function CheckoutPage() {
   return (
     <main className="checkout">
       <div className="checkout-wrap">
-        <h1>Checkout</h1>
-        <p className="muted">Items: {cartCount}</p>
+        <h1>{t("title")}</h1>
+        <p className="muted">
+          {t("items")}: {cartCount}
+        </p>
 
         <div className="checkout-card">
-          <h3>Customer details</h3>
+          <h3>{t("customerDetails")}</h3>
 
           <div className="checkout-list" style={{ gap: 10 }}>
             <input
               name="name"
-              placeholder="Full name *"
+              placeholder={t("fullName")}
               value={customer.name}
               onChange={onChange}
               style={{ width: "100%", padding: 10, borderRadius: 10 }}
@@ -110,42 +117,42 @@ export default function CheckoutPage() {
             <input
               name="email"
               type="email"
-              placeholder="Email *"
+              placeholder={t("email")}
               value={customer.email}
               onChange={onChange}
               style={{ width: "100%", padding: 10, borderRadius: 10 }}
             />
             <input
               name="phone"
-              placeholder="Phone"
+              placeholder={t("phone")}
               value={customer.phone}
               onChange={onChange}
               style={{ width: "100%", padding: 10, borderRadius: 10 }}
             />
             <input
               name="address"
-              placeholder="Address"
+              placeholder={t("address")}
               value={customer.address}
               onChange={onChange}
               style={{ width: "100%", padding: 10, borderRadius: 10 }}
             />
             <input
               name="city"
-              placeholder="City"
+              placeholder={t("city")}
               value={customer.city}
               onChange={onChange}
               style={{ width: "100%", padding: 10, borderRadius: 10 }}
             />
             <input
               name="country"
-              placeholder="Country"
+              placeholder={t("country")}
               value={customer.country}
               onChange={onChange}
               style={{ width: "100%", padding: 10, borderRadius: 10 }}
             />
             <textarea
               name="notes"
-              placeholder="Notes (optional)"
+              placeholder={t("notes")}
               value={customer.notes}
               onChange={onChange}
               rows={3}
@@ -153,14 +160,14 @@ export default function CheckoutPage() {
             />
           </div>
 
-          <h3 style={{ marginTop: 18 }}>Order summary</h3>
+          <h3 style={{ marginTop: 18 }}>{t("orderSummary")}</h3>
 
           <div className="checkout-list">
-            {items.map(({ id, qty, product }) => (
-              <div className="checkout-row" key={id}>
+            {items.map(({ variantKey, qty, selectedColor, product }) => (
+              <div className="checkout-row" key={variantKey}>
                 <span>
                   {product.name}
-                  {product.selectedColor ? ` (${product.selectedColor})` : ""} × {qty}
+                  {selectedColor ? ` (${selectedColor})` : ""} × {qty}
                 </span>
                 <strong>€{(Number(product.price) * qty).toFixed(2)}</strong>
               </div>
@@ -168,18 +175,18 @@ export default function CheckoutPage() {
           </div>
 
           <div className="checkout-total">
-            <span>Total</span>
+            <span>{t("total")}</span>
             <strong>€{total.toFixed(2)}</strong>
           </div>
 
           {err && <p style={{ color: "#ff4081", marginTop: 10 }}>{err}</p>}
 
           <button className="btn-checkout" onClick={placeOrder} disabled={loading}>
-            {loading ? "Placing order..." : "Place order"}
+            {loading ? t("placingOrder") : t("placeOrder")}
           </button>
 
-          <Link className="btn-clear" href="/cart">
-            Back to cart
+          <Link className="btn-clear" href={`/${locale}/cart`}>
+            {t("backToCart")}
           </Link>
         </div>
       </div>

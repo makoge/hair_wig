@@ -1,0 +1,167 @@
+{
+  "header": {
+    "logoAlt": "Confida logo",
+    "toggleMenu": "Toggle menu",
+    "toggleCategories": "Toggle product categories",
+
+    "home": "Home",
+    "products": "Products",
+    "treatWig": "Treat wig",
+    "contact": "Contact",
+    "cart": "Cart",
+    "contactUs": "Contact us",
+
+    "catHuman": "Human Hair",
+    "catLace": "Lace Wig",
+    "catMono": "Monofilament",
+    "catAccessories": "Accessories"
+  },
+  "home": {
+    "heroTitle": "WELCOME TO CONFIDA HAIR",
+    "heroDesc": "Make a selection of our quality hairs among our amazing categories of beautiful luxury hair at your affordable price.",
+    "shopHere": "Shop here",
+
+    "galleryTitle": "Confida Gallery",
+    "beautyTitle": "Beauty & Confidence",
+    "beautyDesc": "A high-quality hair wig is more than just a beauty accessory, it is a statement of self-expression and confidence...",
+
+    "whyTitle": "Why Choose Us",
+    "fastDeliveryTitle": "Fast delivery",
+    "fastDeliveryDesc": "Lightning quick delivery in Europe",
+    "qualityTitle": "Quality products",
+    "qualityDesc": "Quality hand-picked hairs—we make sure we are buying the best for our customers",
+    "trustedTitle": "Trusted brand",
+    "trustedDesc": "Our customers are saying good things about us—reviews.",
+
+    "featuredTitle": "Featured Products",
+    "featuredAria": "featured products",
+    "prev": "previous",
+    "next": "next",
+
+    "quickBuyFrontal": "Frontal Wigs",
+    "quickBuy": "Quick Buy",
+    "quickBuyAccessories": "Accessories",
+    "shopAccessories": "Shop Accessories",
+
+    "contactTitle": "Contact us",
+    "imageAlt": "contact us"
+  },
+  "shop": {
+    "title": "Confida Shop",
+    "all": "All",
+    "lace": "Lace front",
+    "stock": "In stock"
+  },
+  
+  "product": {
+    "details": "Product details",
+    "keyFeatures": "Key features",
+    "care": "Care instructions",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "descriptionTitle": "Product description",
+    "reviewsAria": "Customer reviews",
+    "relatedAria": "Related products"
+  },
+  "productCard": {
+    "addToCart": "Add to cart",
+    "viewDetails": "View details",
+    "selectColor": "Select color {color}"
+  },
+  "cartPage": {
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "goToShop": "Go to shop",
+
+    "color": "Color",
+    "remove": "Remove",
+
+    "items": "Items",
+    "total": "Total",
+    "clear": "Clear cart",
+    "checkout": "Checkout",
+    "continue": "Continue shopping →",
+
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity"
+  },
+ "cart": {
+    "addToCart": "Add to cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "items": "Items",
+
+    "emptyCart": "Your cart is empty.",
+    "goToShop": "Go to shop",
+
+    "customerDetails": "Customer details",
+    "fullName": "Full name *",
+    "email": "Email *",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "notes": "Notes (optional)",
+
+    "orderSummary": "Order summary",
+    "total": "Total",
+
+    "placeOrder": "Place order",
+    "placingOrder": "Placing order...",
+    "backToCart": "Back to cart",
+
+    "successTitle": "Order placed ✅",
+    "orderId": "Order ID",
+    "emailSent": "We sent a confirmation email to {email}.",
+    "continueShopping": "Continue shopping",
+
+    "errEmptyCart": "Your cart is empty.",
+    "errNameEmail": "Name and email are required.",
+    "errCheckoutFailed": "Checkout failed"
+  },
+  "contactInfo": {
+    "title": "Contact us",
+    "phone": "Phone Number",
+    "address": "Address",
+    "email": "Email",
+    "imageAlt": "contact us"
+  },
+  "contactForm": {
+    "title": "Contact us",
+    "nameLabel": "Name",
+    "namePlaceholder": "enter your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "enter your email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "write something",
+    "send": "Send",
+    "sending": "Sending...",
+    "sent": "Message sent ✅",
+    "error": "Something went wrong."
+  },
+  "footer": {
+    "joinTitle": "Join ConfidaHair",
+    "emailPlaceholder": "enter your email",
+    "subscribe": "Subscribe",
+    "sending": "Sending...",
+
+    "msgInvalidEmail": "Please enter a valid email.",
+    "msgSuccess": "Subscribed successfully!",
+    "msgError": "Something went wrong. Try again.",
+
+    "helpTitle": "Help and Support",
+    "trackOrder": "Track my order",
+    "returnsExchange": "Returns & Exchange",
+    "changeCancel": "Change & Cancel",
+    "customerReviews": "Customer Reviews",
+    "faq": "FAQ",
+
+    "aboutTitle": "About Confida",
+    "ourValues": "Our Values",
+    "innovation": "Innovation",
+    "support24h": "24 hours support",
+
+    "copyright": "© CONFIDA {year}"
+  }
+}

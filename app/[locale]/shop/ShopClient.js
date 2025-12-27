@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { products } from "../data/products";
-import ProductGrid from "../components/ProductGrid";
+import { useTranslations } from "next-intl";
 
-
-
+import { products } from "@/app/data/products";
+import ProductGrid from "@/app/components/ProductGrid";
 
 export default function ShopClient() {
+  const t = useTranslations("shop");
   const [filter, setFilter] = useState("all");
 
   const filtered = products.filter((p) => {
@@ -19,7 +19,7 @@ export default function ShopClient() {
   return (
     <main>
       <div className="shop-head">
-        <h1>Confida Shop</h1>
+        <h1>{t("title")}</h1>
 
         <div className="shop-toolbar">
           <button
@@ -27,7 +27,7 @@ export default function ShopClient() {
             className={`chip ${filter === "all" ? "active" : ""}`}
             onClick={() => setFilter("all")}
           >
-            All
+            {t("all")}
           </button>
 
           <button
@@ -35,7 +35,7 @@ export default function ShopClient() {
             className={`chip ${filter === "lace" ? "active" : ""}`}
             onClick={() => setFilter("lace")}
           >
-            Lace front
+            {t("lace")}
           </button>
 
           <button
@@ -43,7 +43,7 @@ export default function ShopClient() {
             className={`chip ${filter === "stock" ? "active" : ""}`}
             onClick={() => setFilter("stock")}
           >
-            In stock
+            {t("stock")}
           </button>
         </div>
       </div>

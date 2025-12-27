@@ -1,0 +1,161 @@
+{
+  "header": {
+    "logoAlt": "Logo Confida",
+    "toggleMenu": "Ouvrir le menu",
+    "toggleCategories": "Afficher les catégories",
+
+    "home": "Accueil",
+    "products": "Produits",
+    "treatWig": "Entretien",
+    "contact": "Contact",
+    "cart": "Panier",
+    "contactUs": "Nous contacter",
+
+    "catHuman": "Cheveux humains",
+    "catLace": "Perruque lace",
+    "catMono": "Monofilament",
+    "catAccessories": "Accessoires"
+  },
+  "home": {
+    "heroTitle": "BIENVENUE CHEZ CONFIDA HAIR",
+    "heroDesc": "Découvrez notre sélection de cheveux de qualité parmi nos magnifiques catégories de cheveux de luxe à des prix abordables.",
+    "shopHere": "Acheter maintenant",
+    "galleryTitle": "Galerie Confida",
+    "beautyTitle": "Beauté & Confiance",
+    "beautyDesc": "Une perruque de qualité est bien plus qu’un simple accessoire de beauté : c’est une affirmation de style, d’expression de soi et de confiance...",
+    "whyTitle": "Pourquoi nous choisir",
+    "fastDeliveryTitle": "Livraison rapide",
+    "fastDeliveryDesc": "Livraison ultra-rapide en Europe",
+    "qualityTitle": "Produits de qualité",
+    "qualityDesc": "Cheveux sélectionnés avec soin — nous choisissons le meilleur pour nos clientes",
+    "trustedTitle": "Marque de confiance",
+    "trustedDesc": "Nos clientes parlent en bien de nous — avis.",
+    "featuredTitle": "Produits en vedette",
+    "featuredAria": "produits en vedette",
+    "prev": "précédent",
+    "next": "suivant",
+    "quickBuyFrontal": "Perruques frontales",
+    "quickBuy": "Achat rapide",
+    "quickBuyAccessories": "Accessoires",
+    "shopAccessories": "Acheter des accessoires",
+    "contactTitle": "Contactez-nous",
+    "imageAlt": "contactez-nous"
+  },
+  "shop": {
+    "title": "Boutique Confida",
+    "all": "Tous",
+    "lace": "Lace front",
+    "stock": "En stock"
+  },
+  "product": {
+    "details": "Détails du produit",
+    "keyFeatures": "Caractéristiques principales",
+    "care": "Conseils d’entretien",
+    "inStock": "En stock",
+    "outOfStock": "Rupture de stock",
+    "descriptionTitle": "Description du produit",
+    "reviewsAria": "Avis des clients",
+    "relatedAria": "Produits similaires"
+  },
+  "contactInfo": {
+    "title": "Contactez-nous",
+    "phone": "Numéro de téléphone",
+    "address": "Adresse",
+    "email": "E-mail",
+    "imageAlt": "contactez-nous"
+  },
+  "cartPage": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide.",
+    "goToShop": "Aller à la boutique",
+
+    "color": "Couleur",
+    "remove": "Retirer",
+
+    "items": "Articles",
+    "total": "Total",
+    "clear": "Vider le panier",
+    "checkout": "Commander",
+    "continue": "Continuer les achats →",
+
+    "decreaseQty": "Diminuer la quantité",
+    "increaseQty": "Augmenter la quantité"
+  },
+  "cart": {
+    "addToCart": "Ajouter au panier"
+  },
+  "productCard": {
+    "addToCart": "Ajouter au panier",
+    "viewDetails": "Voir les détails",
+    "selectColor": "Choisir la couleur {color}"
+  },
+  "checkout": {
+    "title": "Paiement",
+    "items": "Articles",
+
+    "emptyCart": "Votre panier est vide.",
+    "goToShop": "Aller à la boutique",
+
+    "customerDetails": "Coordonnées du client",
+    "fullName": "Nom complet *",
+    "email": "E-mail *",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "city": "Ville",
+    "country": "Pays",
+    "notes": "Notes (facultatif)",
+
+    "orderSummary": "Récapitulatif de commande",
+    "total": "Total",
+
+    "placeOrder": "Passer la commande",
+    "placingOrder": "Commande en cours...",
+    "backToCart": "Retour au panier",
+
+    "successTitle": "Commande validée ✅",
+    "orderId": "ID de commande",
+    "emailSent": "Nous avons envoyé un e-mail de confirmation à {email}.",
+    "continueShopping": "Continuer les achats",
+
+    "errEmptyCart": "Votre panier est vide.",
+    "errNameEmail": "Le nom et l’e-mail sont obligatoires.",
+    "errCheckoutFailed": "Échec du paiement"
+  },
+  "contactForm": {
+    "title": "Contactez-nous",
+    "nameLabel": "Nom",
+    "namePlaceholder": "entrez votre nom",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "entrez votre e-mail",
+    "messageLabel": "Message",
+    "messagePlaceholder": "écrivez votre message",
+    "send": "Envoyer",
+    "sending": "Envoi en cours...",
+    "sent": "Message envoyé ✅",
+    "error": "Une erreur est survenue."
+  },
+  "footer": {
+    "joinTitle": "Rejoindre ConfidaHair",
+    "emailPlaceholder": "entrez votre e-mail",
+    "subscribe": "S’abonner",
+    "sending": "Envoi en cours...",
+
+    "msgInvalidEmail": "Veuillez saisir une adresse e-mail valide.",
+    "msgSuccess": "Abonnement réussi !",
+    "msgError": "Une erreur est survenue. Réessayez.",
+
+    "helpTitle": "Aide et support",
+    "trackOrder": "Suivre ma commande",
+    "returnsExchange": "Retours & échanges",
+    "changeCancel": "Modifier & annuler",
+    "customerReviews": "Avis clients",
+    "faq": "FAQ",
+
+    "aboutTitle": "À propos de Confida",
+    "ourValues": "Nos valeurs",
+    "innovation": "Innovation",
+    "support24h": "Support 24h/24",
+
+    "copyright": "© CONFIDA {year}"
+  }
+}

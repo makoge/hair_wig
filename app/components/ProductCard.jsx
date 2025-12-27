@@ -2,11 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { useCart } from "../context/CartContext";
+import { useLocale, useTranslations } from "next-intl";
+
+import { useCart } from "@/app/context/CartContext";
 
 export default function ProductCard({ product }) {
-  const { addToCart } = useCart();
+  const t = useTranslations("productCard");
+  const locale = useLocale();
 
+  const { addToCart } = useCart();
   if (!product) return null;
 
   const {
@@ -19,7 +23,7 @@ export default function ProductCard({ product }) {
     colors = [],
     slug,
     image,
-    colorImages = {},
+    colorImages = {}
   } = product;
 
   const defaultColor = useMemo(() => colors[0] || "", [colors]);
@@ -30,7 +34,7 @@ export default function ProductCard({ product }) {
     activeColor && colorImages?.[activeColor] ? colorImages[activeColor] : image;
 
   const handleAddToCart = () => {
-    addToCart(product, 1, activeColor); // ✅ matches your updated CartContext
+    addToCart(product, 1, activeColor);
   };
 
   return (
@@ -61,7 +65,7 @@ export default function ProductCard({ product }) {
                 className={`swatch ${activeColor === c ? "selected" : ""}`}
                 style={{ backgroundColor: c }}
                 onClick={() => setSelectedColor(c)}
-                aria-label={`Select color ${c}`}
+                aria-label={t("selectColor", { color: c })}
               />
             ))}
           </div>
@@ -69,11 +73,14 @@ export default function ProductCard({ product }) {
 
         <div className="cart-actions">
           <button className="btn-product" type="button" onClick={handleAddToCart}>
-            Add to cart
+            {t("addToCart")}
           </button>
 
-          <Link href={slug ? `/products/${slug}` : "#"} className="btn-product-ghost">
-            View details
+          <Link
+            href={slug ? `/${locale}/products/${slug}` : "#"}
+            className="btn-product-ghost"
+          >
+            {t("viewDetails")}
           </Link>
         </div>
       </div>

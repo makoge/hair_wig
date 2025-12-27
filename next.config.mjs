@@ -1,7 +1,12 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-   reactStrictMode: true,
+  reactStrictMode: true
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./i18n/request.js");
+
+export default withNextIntl(nextConfig);
+
+

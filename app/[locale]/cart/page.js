@@ -2,19 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "../context/CartContext";
+import { useLocale, useTranslations } from "next-intl";
+
+import { useCart } from "@/app/context/CartContext";
 
 export default function CartPage() {
-  const { items, cartCount, cartTotal, updateQty, removeFromCart, clearCart } = useCart();
+  const t = useTranslations("cartPage");
+  const locale = useLocale();
+
+  const { items, cartCount, cartTotal, updateQty, removeFromCart, clearCart } =
+    useCart();
 
   return (
     <main className="cart-container">
-      <h1>Your cart ({cartCount})</h1>
+      <h1>
+        {t("title")} ({cartCount})
+      </h1>
 
       {items.length === 0 ? (
         <div className="cart-empty">
-          <p>Your cart is empty.</p>
-          <Link href="/shop" className="cart-link">Go to shop</Link>
+          <p>{t("empty")}</p>
+          <Link href={`/${locale}/shop`} className="cart-link">
+            {t("goToShop")}
+          </Link>
         </div>
       ) : (
         <div className="cart-layout">
@@ -33,11 +43,13 @@ export default function CartPage() {
 
                   <div className="cart-info">
                     <div className="item-title">{product.name}</div>
-                    <div className="item-meta">€{Number(product.price).toFixed(2)}</div>
+                    <div className="item-meta">
+                      €{Number(product.price).toFixed(2)}
+                    </div>
 
                     {selectedColor && (
                       <div className="item-meta">
-                        Color: <strong>{selectedColor}</strong>
+                        {t("color")}: <strong>{selectedColor}</strong>
                       </div>
                     )}
 
@@ -46,6 +58,7 @@ export default function CartPage() {
                         className="qty-btn"
                         onClick={() => updateQty(variantKey, qty - 1)}
                         type="button"
+                        aria-label={t("decreaseQty")}
                       >
                         −
                       </button>
@@ -56,6 +69,7 @@ export default function CartPage() {
                         className="qty-btn"
                         onClick={() => updateQty(variantKey, qty + 1)}
                         type="button"
+                        aria-label={t("increaseQty")}
                       >
                         +
                       </button>
@@ -65,7 +79,7 @@ export default function CartPage() {
                         onClick={() => removeFromCart(variantKey)}
                         type="button"
                       >
-                        Remove
+                        {t("remove")}
                       </button>
                     </div>
                   </div>
@@ -80,21 +94,26 @@ export default function CartPage() {
 
           <aside className="cart-summary">
             <div className="row">
-              <span>Items</span>
+              <span>{t("items")}</span>
               <strong>{cartCount}</strong>
             </div>
 
             <div className="row">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <strong>€{cartTotal.toFixed(2)}</strong>
             </div>
 
             <button className="btn-clear" onClick={clearCart} type="button">
-              Clear cart
+              {t("clear")}
             </button>
 
-            <Link href="/checkout" className="btn-checkout">Checkout</Link>
-            <Link href="/shop" className="cart-link">Continue shopping →</Link>
+            <Link href={`/${locale}/checkout`} className="btn-checkout">
+              {t("checkout")}
+            </Link>
+
+            <Link href={`/${locale}/shop`} className="cart-link">
+              {t("continue")}
+            </Link>
           </aside>
         </div>
       )}
