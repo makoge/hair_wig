@@ -3,6 +3,8 @@
     "logoAlt": "Confida logo",
     "toggleMenu": "Toggle menu",
     "toggleCategories": "Toggle product categories",
+     "primaryNav": "Primary navigation",
+    "searchPlaceholder": "Search wigs, lace, monofilament…",
 
     "home": "Home",
     "products": "Products",
@@ -47,11 +49,16 @@
     "imageAlt": "contact us"
   },
   "shop": {
-    "title": "Confida Shop",
-    "all": "All",
-    "lace": "Lace front",
-    "stock": "In stock"
-  },
+  "title": "Confida Shop",
+  "all": "All",
+  "lace": "Lace front",
+  "stock": "In stock",
+  "sort": "Sort",
+  "default": "Default",
+  "lowHigh": "Price: Low to High",
+  "highLow": "Price: High to Low"
+},
+
   
   "product": {
     "details": "Product details",
@@ -120,6 +127,16 @@
     "errNameEmail": "Name and email are required.",
     "errCheckoutFailed": "Checkout failed"
   },
+  "reviews": {
+  "title": "Customer Reviews",
+  "subtitle": "Latest real feedback from Confida shoppers.",
+  "viewAll": "See all",
+  "unavailable": "Reviews unavailable right now.",
+  "empty": "No reviews yet.",
+  "emptyHint": "Be the first to review a product after purchase."
+},
+
+
   "contactInfo": {
     "title": "Contact us",
     "phone": "Phone Number",
@@ -145,6 +162,9 @@
     "emailPlaceholder": "enter your email",
     "subscribe": "Subscribe",
     "sending": "Sending...",
+     "footerAria": "Footer",
+    "joinDesc": "Get updates, offers and new arrivals.",
+    "socialAria": "Social links",
 
     "msgInvalidEmail": "Please enter a valid email.",
     "msgSuccess": "Subscribed successfully!",

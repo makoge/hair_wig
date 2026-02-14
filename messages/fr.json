@@ -3,6 +3,8 @@
     "logoAlt": "Logo Confida",
     "toggleMenu": "Ouvrir le menu",
     "toggleCategories": "Afficher les catégories",
+    "primaryNav": "Navigation principale",
+    "searchPlaceholder": "Rechercher des perruques, lace, monofilament…",
 
     "home": "Accueil",
     "products": "Produits",
@@ -16,13 +18,16 @@
     "catMono": "Monofilament",
     "catAccessories": "Accessoires"
   },
+
   "home": {
     "heroTitle": "BIENVENUE CHEZ CONFIDA HAIR",
     "heroDesc": "Découvrez notre sélection de cheveux de qualité parmi nos magnifiques catégories de cheveux de luxe à des prix abordables.",
     "shopHere": "Acheter maintenant",
+
     "galleryTitle": "Galerie Confida",
     "beautyTitle": "Beauté & Confiance",
     "beautyDesc": "Une perruque de qualité est bien plus qu’un simple accessoire de beauté : c’est une affirmation de style, d’expression de soi et de confiance...",
+
     "whyTitle": "Pourquoi nous choisir",
     "fastDeliveryTitle": "Livraison rapide",
     "fastDeliveryDesc": "Livraison ultra-rapide en Europe",
@@ -30,23 +35,41 @@
     "qualityDesc": "Cheveux sélectionnés avec soin — nous choisissons le meilleur pour nos clientes",
     "trustedTitle": "Marque de confiance",
     "trustedDesc": "Nos clientes parlent en bien de nous — avis.",
+
     "featuredTitle": "Produits en vedette",
     "featuredAria": "produits en vedette",
     "prev": "précédent",
     "next": "suivant",
+
     "quickBuyFrontal": "Perruques frontales",
     "quickBuy": "Achat rapide",
     "quickBuyAccessories": "Accessoires",
     "shopAccessories": "Acheter des accessoires",
+
     "contactTitle": "Contactez-nous",
     "imageAlt": "contactez-nous"
   },
-  "shop": {
-    "title": "Boutique Confida",
-    "all": "Tous",
-    "lace": "Lace front",
-    "stock": "En stock"
+
+  "reviews": {
+    "title": "Avis clients",
+    "subtitle": "Derniers retours authentiques de clientes Confida.",
+    "viewAll": "Voir tout",
+    "unavailable": "Les avis sont indisponibles pour le moment.",
+    "empty": "Pas encore d’avis.",
+    "emptyHint": "Soyez la première à laisser un avis après votre achat."
   },
+
+  "shop": {
+  "title": "Boutique Confida",
+  "all": "Tous",
+  "lace": "Lace front",
+  "stock": "En stock",
+  "sort": "Trier",
+  "default": "Par défaut",
+  "lowHigh": "Prix : croissant",
+  "highLow": "Prix : décroissant"
+},
+
   "product": {
     "details": "Détails du produit",
     "keyFeatures": "Caractéristiques principales",
@@ -57,6 +80,7 @@
     "reviewsAria": "Avis des clients",
     "relatedAria": "Produits similaires"
   },
+
   "contactInfo": {
     "title": "Contactez-nous",
     "phone": "Numéro de téléphone",
@@ -64,6 +88,7 @@
     "email": "E-mail",
     "imageAlt": "contactez-nous"
   },
+
   "cartPage": {
     "title": "Votre panier",
     "empty": "Votre panier est vide.",
@@ -81,14 +106,17 @@
     "decreaseQty": "Diminuer la quantité",
     "increaseQty": "Augmenter la quantité"
   },
+
   "cart": {
     "addToCart": "Ajouter au panier"
   },
+
   "productCard": {
     "addToCart": "Ajouter au panier",
     "viewDetails": "Voir les détails",
     "selectColor": "Choisir la couleur {color}"
   },
+
   "checkout": {
     "title": "Paiement",
     "items": "Articles",
@@ -121,6 +149,7 @@
     "errNameEmail": "Le nom et l’e-mail sont obligatoires.",
     "errCheckoutFailed": "Échec du paiement"
   },
+
   "contactForm": {
     "title": "Contactez-nous",
     "nameLabel": "Nom",
@@ -132,10 +161,16 @@
     "send": "Envoyer",
     "sending": "Envoi en cours...",
     "sent": "Message envoyé ✅",
+    "success": "Message envoyé ✅",
     "error": "Une erreur est survenue."
   },
+
   "footer": {
+    "footerAria": "Pied de page",
     "joinTitle": "Rejoindre ConfidaHair",
+    "joinDesc": "Recevez des offres, nouveautés et mises à jour.",
+    "socialAria": "Réseaux sociaux",
+
     "emailPlaceholder": "entrez votre e-mail",
     "subscribe": "S’abonner",
     "sending": "Envoi en cours...",
