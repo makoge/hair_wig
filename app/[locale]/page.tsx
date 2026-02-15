@@ -36,9 +36,7 @@ export default async function HomePage({ params }: Props) {
 
       <Hero
         locale={locale}
-        title="Premium Human Hair & Monofilament Wigs"
-        description="Luxury lace front and HD lace wigs designed for natural beauty, comfort and confidence."
-        buttonLabel="Shop Now"
+      
       />
 
       <HomeClient />
