@@ -11,11 +11,22 @@ type Props = {
   locale: string;
 };
 
+const EVENT_NAME = "confida:color-change";
+
 const clampQty = (n: unknown) => {
   const num = Number(n);
   if (!Number.isFinite(num)) return 1;
   return Math.max(1, Math.min(99, Math.floor(num)));
 };
+
+function isHexColor(v: string) {
+  return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v);
+}
+
+function imageForColor(product: Product, color: string): string | undefined {
+  if (product.colorImages && color && product.colorImages[color]) return product.colorImages[color];
+  return product.images?.[0];
+}
 
 export default function ProductDetailsClient({ product, locale }: Props) {
   const router = useRouter();
@@ -39,6 +50,16 @@ export default function ProductDetailsClient({ product, locale }: Props) {
     if (!inStock) return;
     addToCart(product, qty, selectedColor);
     router.push(`/${locale}/cart`);
+  };
+
+  const onSelectColor = (c: string) => {
+    setSelectedColor(c);
+    const img = imageForColor(product, c);
+
+    // notify ProductMediaClient (no prop drilling needed)
+    window.dispatchEvent(
+      new CustomEvent(EVENT_NAME, { detail: { color: c, image: img } })
+    );
   };
 
   const price = Number(product.price || 0).toFixed(2);
@@ -77,7 +98,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
               <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-bold text-[#363434]/80">
                 <span
                   className="h-3.5 w-3.5 rounded-full ring-2 ring-black/10"
-                  style={{ backgroundColor: selectedColor }}
+                  style={{ backgroundColor: isHexColor(selectedColor) ? selectedColor : "#ddd" }}
                 />
                 Selected
               </span>
@@ -91,13 +112,13 @@ export default function ProductDetailsClient({ product, locale }: Props) {
                 <button
                   key={c}
                   type="button"
-                  onClick={() => setSelectedColor(c)}
+                  onClick={() => onSelectColor(c)}
                   className={[
                     "h-9 w-9 rounded-full transition",
                     "ring-2 ring-black/10 hover:scale-[1.03] hover:ring-black/20",
-                    active ? "outline outline-2 outline-[#dda0dd] outline-offset-2" : "",
+                    active ? "outline outline-[#dda0dd] outline-offset-2" : "",
                   ].join(" ")}
-                  style={{ backgroundColor: c }}
+                  style={{ backgroundColor: isHexColor(c) ? c : "#ddd" }}
                   aria-label={`Select color ${c}`}
                 />
               );
@@ -188,3 +209,4 @@ export default function ProductDetailsClient({ product, locale }: Props) {
     </section>
   );
 }
+

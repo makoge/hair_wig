@@ -6,13 +6,20 @@ import { setRequestLocale } from "next-intl/server";
 import { products } from "@/app/data/products";
 import ProductDetailsClient from "@/app/components/ProductDetailsClient";
 import Reviews from "@/app/components/Reviews";
+import ProductMediaClient from "@/app/components/ProductMediaClient";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+const BASE_URL = "https://confida.shop";
+
 function getHeroImage(p: (typeof products)[number]) {
   return p.images?.[0] ?? "/img/placeholder.jpg";
+}
+
+function uniq(arr: string[]) {
+  return Array.from(new Set(arr.filter(Boolean)));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -20,47 +27,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = products.find((p) => p.slug === slug);
   if (!product) return {};
 
-  const base = "https://confida.shop";
-  const url = `${base}/${locale}/products/${product.slug}`;
+  const url = `${BASE_URL}/${locale}/products/${product.slug}`;
   const title = `${product.name} | Confida Lace Hair`;
   const description =
-    product.pageDescription?.slice(0, 160) ||
-    "Shop premium wigs at Confida Lace Hair.";
+    (product.pageDescription || product.description || "Shop premium wigs at Confida Lace Hair.")
+      .slice(0, 160);
 
-  const img = `${base}${getHeroImage(product)}`;
-  const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  name: product.name,
-  description: product.pageDescription,
-  image: [img],
-  sku: product.id,
-  brand: { "@type": "Brand", name: "Confida" },
-  offers: {
-    "@type": "Offer",
-    priceCurrency: "EUR",
-    price: Number(product.price),
-    availability: product.inStock
-      ? "https://schema.org/InStock"
-      : "https://schema.org/OutOfStock",
-    url,
-  },
-};
-
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-/>
-
+  const hero = getHeroImage(product);
+  const ogImg = `${BASE_URL}${hero.startsWith("/") ? hero : `/${hero}`}`;
 
   return {
+    metadataBase: new URL(BASE_URL),
     title,
     description,
     alternates: {
       canonical: url,
       languages: {
-        en: `${base}/en/products/${product.slug}`,
-        fr: `${base}/fr/products/${product.slug}`,
+        en: `${BASE_URL}/en/products/${product.slug}`,
+        fr: `${BASE_URL}/fr/products/${product.slug}`,
       },
     },
     openGraph: {
@@ -69,14 +53,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       siteName: "Confida Lace Hair",
-      images: [{ url: img, width: 1200, height: 630, alt: product.name }],
+      images: [{ url: ogImg, width: 1200, height: 630, alt: product.name }],
       locale,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [img],
+      images: [ogImg],
     },
   };
 }
@@ -88,15 +72,27 @@ export default async function ProductPage({ params }: Props) {
   const product = products.find((p) => p.slug === slug);
   if (!product) notFound();
 
-  const img = getHeroImage(product);
+  const hero = getHeroImage(product);
 
-  // SEO JSON-LD
+  const canonicalUrl = `${BASE_URL}/${locale}/products/${product.slug}`;
+
+  // Build a solid thumbnail list for the gallery:
+  // 1) hero
+  // 2) product.images
+  // 3) product.colorImages values
+  const thumbs = uniq([
+    hero,
+    ...(product.images ?? []),
+    ...(product.colorImages ? Object.values(product.colorImages) : []),
+  ]);
+
+  // JSON-LD (server-rendered = great for SEO)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.pageDescription || product.description,
-    image: product.images?.length ? product.images : [img],
+    image: thumbs.map((src) => `${BASE_URL}${src.startsWith("/") ? src : `/${src}`}`),
     sku: product.id,
     brand: { "@type": "Brand", name: "Confida Lace Hair" },
     category: product.category,
@@ -107,7 +103,7 @@ export default async function ProductPage({ params }: Props) {
       availability: product.inStock
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
-      url: `https://confida.shop/${locale}/products/${product.slug}`,
+      url: canonicalUrl,
     },
   };
 
@@ -119,21 +115,10 @@ export default async function ProductPage({ params }: Props) {
       />
 
       <div className="grid gap-10 lg:grid-cols-2">
-        {/* Media */}
-        <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
-          <div className="relative aspect-[4/5] w-full">
-            <Image
-              src={img}
-              alt={product.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 92vw, 520px"
-              priority={false}
-            />
-          </div>
-        </div>
+        {/* MEDIA (client component handles color switching & thumbnail clicks) */}
+        <ProductMediaClient productName={product.name} hero={hero} thumbs={thumbs} />
 
-        {/* Info */}
+        {/* INFO */}
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-2 text-xs font-extrabold text-[#363434]/80">
             {product.category}
@@ -147,13 +132,12 @@ export default async function ProductPage({ params }: Props) {
             {product.pageDescription}
           </p>
 
-          {/* IMPORTANT: your ProductDetailsClient currently uses white text.
-             Either update it (recommended) or wrap it with a text override class. */}
+          {/* Details client: emits onColorChange -> ProductMediaClient listens via window event */}
           <div className="text-[#363434]">
             <ProductDetailsClient product={product} locale={locale} />
           </div>
 
-          {/* Details */}
+          {/* DETAILS */}
           <div className="mt-10 space-y-6">
             <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
               <h2 className="text-lg font-black text-[#363434]">Key features</h2>
@@ -183,7 +167,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </div>
 
-      {/* ✅ Reviews section */}
+      {/* REVIEWS */}
       <div className="mt-12">
         <Reviews product={product} />
       </div>

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 
@@ -10,6 +12,19 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+export const metadata: Metadata = {
+  metadataBase: new URL("https://confida.shop"),
+  title: {
+    default: "Confida Lace Hair",
+    template: "%s | Confida Lace Hair",
+  },
+  description: "Premium human hair wigs and monofilament wigs.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+};
+
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
@@ -20,15 +35,34 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Confida Lace Hair",
+    url: "https://confida.shop",
+    logo: "https://confida.shop/img/hair_logo.png",
+  };
+
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <CartProvider>
-        <Header />
-        {children}
-        <Footer />
-      </CartProvider>
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <body>
+        <Script
+          id="org-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CartProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
+
 
 
