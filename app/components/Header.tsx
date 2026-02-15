@@ -163,26 +163,33 @@ export default function Header() {
         ].join(" ")}
       >
         {/* Left: Logo */}
-        <div className="flex items-center">
-          <Link
-            href={`/${locale}`}
-            aria-label={tt("home", "Home")}
-            onClick={() => {
-              closeMenu();
-              setLangOpen(false);
-            }}
-            className="inline-flex items-center"
-          >
-            <Image
-              src="/img/hair_logo.png"
-              width={64}
-              height={54}
-              alt={tt("logoAlt", "Confida logo")}
-              priority
-              className="h-[44px] w-auto"
-            />
-          </Link>
-        </div>
+<div className="flex items-center">
+  <Link
+    href={`/${locale}`}
+    aria-label={tt("home", "Home")}
+    onClick={() => {
+      closeMenu();
+      setLangOpen(false);
+    }}
+    className="group relative flex items-center"
+  >
+    {/* Soft glow behind logo */}
+    <span className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#dda0dd]/25 to-transparent blur-xl opacity-70 transition group-hover:opacity-100" />
+
+    {/* Glass container */}
+    <span className="relative flex items-center rounded-2xl border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-md transition group-hover:bg-white/10">
+      <Image
+        src="/img/hair_logo.png"
+        width={80}
+        height={60}
+        alt={tt("logoAlt", "Confida logo")}
+        priority
+        className="h-[40px] w-auto object-contain drop-shadow-lg"
+      />
+    </span>
+  </Link>
+</div>
+
 
         {/* Center: Desktop nav + search */}
         <div className="hidden flex-1 items-center justify-center gap-6 md:flex">

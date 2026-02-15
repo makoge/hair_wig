@@ -44,23 +44,23 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <html lang={locale}>
-      <body>
+    
+       <NextIntlClientProvider locale={locale} messages={messages}>
         <Script
           id="org-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
 
-        <NextIntlClientProvider locale={locale} messages={messages}>
+       
           <CartProvider>
             <Header />
             {children}
             <Footer />
           </CartProvider>
         </NextIntlClientProvider>
-      </body>
-    </html>
+      
+    
   );
 }
 

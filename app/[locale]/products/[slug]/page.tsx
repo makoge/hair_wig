@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 
 import { products } from "@/app/data/products";
 import ProductDetailsClient from "@/app/components/ProductDetailsClient";
 import Reviews from "@/app/components/Reviews";
 import ProductMediaClient from "@/app/components/ProductMediaClient";
+import RelatedProducts from "@/app/components/RelatedProducts";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -29,9 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const url = `${BASE_URL}/${locale}/products/${product.slug}`;
   const title = `${product.name} | Confida Lace Hair`;
-  const description =
-    (product.pageDescription || product.description || "Shop premium wigs at Confida Lace Hair.")
-      .slice(0, 160);
+  const description = (product.pageDescription ||
+    product.description ||
+    "Shop premium wigs at Confida Lace Hair.").slice(0, 160);
 
   const hero = getHeroImage(product);
   const ogImg = `${BASE_URL}${hero.startsWith("/") ? hero : `/${hero}`}`;
@@ -69,24 +69,20 @@ export default async function ProductPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
+  const t = await getTranslations({ locale, namespace: "productPage" });
+
   const product = products.find((p) => p.slug === slug);
   if (!product) notFound();
 
   const hero = getHeroImage(product);
-
   const canonicalUrl = `${BASE_URL}/${locale}/products/${product.slug}`;
 
-  // Build a solid thumbnail list for the gallery:
-  // 1) hero
-  // 2) product.images
-  // 3) product.colorImages values
   const thumbs = uniq([
     hero,
     ...(product.images ?? []),
     ...(product.colorImages ? Object.values(product.colorImages) : []),
   ]);
 
-  // JSON-LD (server-rendered = great for SEO)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -98,7 +94,7 @@ export default async function ProductPage({ params }: Props) {
     category: product.category,
     offers: {
       "@type": "Offer",
-      priceCurrency: "USD",
+      priceCurrency: "EUR",
       price: String(product.price),
       availability: product.inStock
         ? "https://schema.org/InStock"
@@ -115,10 +111,8 @@ export default async function ProductPage({ params }: Props) {
       />
 
       <div className="grid gap-10 lg:grid-cols-2">
-        {/* MEDIA (client component handles color switching & thumbnail clicks) */}
         <ProductMediaClient productName={product.name} hero={hero} thumbs={thumbs} />
 
-        {/* INFO */}
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-4 py-2 text-xs font-extrabold text-[#363434]/80">
             {product.category}
@@ -132,15 +126,13 @@ export default async function ProductPage({ params }: Props) {
             {product.pageDescription}
           </p>
 
-          {/* Details client: emits onColorChange -> ProductMediaClient listens via window event */}
           <div className="text-[#363434]">
             <ProductDetailsClient product={product} locale={locale} />
           </div>
 
-          {/* DETAILS */}
           <div className="mt-10 space-y-6">
             <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-black text-[#363434]">Key features</h2>
+              <h2 className="text-lg font-black text-[#363434]">{t("keyFeatures")}</h2>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm font-semibold text-[#363434]/75">
                 {product.highlights.map((h, i) => (
                   <li key={i}>{h}</li>
@@ -149,7 +141,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-black text-[#363434]">Care</h2>
+              <h2 className="text-lg font-black text-[#363434]">{t("care")}</h2>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm font-semibold text-[#363434]/75">
                 {product.care.map((c, i) => (
                   <li key={i}>{c}</li>
@@ -158,7 +150,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-black text-[#363434]">Description</h2>
+              <h2 className="text-lg font-black text-[#363434]">{t("description")}</h2>
               <p className="mt-3 text-sm font-semibold leading-relaxed text-[#363434]/75">
                 {product.description}
               </p>
@@ -167,10 +159,12 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </div>
 
-      {/* REVIEWS */}
       <div className="mt-12">
         <Reviews product={product} />
       </div>
+
+      <RelatedProducts current={product} products={products} />
     </main>
   );
 }
+

@@ -26,6 +26,8 @@
     "galleryTitle": "Confida Gallery",
     "beautyTitle": "Beauty & Confidence",
     "beautyDesc": "A high-quality hair wig is more than just a beauty accessory, it is a statement of self-expression and confidence...",
+     
+  "brandName": "Confida Lace Hair",
 
     "whyTitle": "Why Choose Us",
     "fastDeliveryTitle": "Fast delivery",
@@ -46,12 +48,59 @@
     "shopAccessories": "Shop Accessories",
 
     "contactTitle": "Contact us",
-    "imageAlt": "contact us"
+    "imageAlt": "contact us",
+    "features": {
+    "natural": {
+      "title": "Natural look",
+      "desc": "Realistic finish & hairline."
+    },
+    "comfort": {
+      "title": "Comfort fit",
+      "desc": "Breathable daily wear."
+    },
+    "delivery": {
+      "title": "Fast delivery",
+      "desc": "Reliable EU shipping."
+    }}
+    
+  },
+  
+  "hero": {
+    "brand": "Confida Lace Hair",
+    "title": "Premium Human Hair & Monofilament Wigs",
+    "description": "Luxury lace front and HD lace wigs designed for natural beauty, comfort and confidence.",
+    "shop": "Shop Now",
+    "explore": "Explore Human Hair Wigs",
+
+    "naturalTitle": "Natural look",
+    "naturalDesc": "Premium hairlines & realistic finish.",
+
+    "comfortTitle": "Comfort fit",
+    "comfortDesc": "Breathable caps for daily wear.",
+
+    "deliveryTitle": "Fast delivery",
+    "deliveryDesc": "Reliable shipping & support.",
+
+    "footerLine": "Premium wigs • Secure checkout • EU delivery"
   },
   "shop": {
-  "title": "Confida Shop",
-  "all": "All",
-  "lace": "Lace front",
+   "title": "Confida Boutique",
+    "subtitle": "Premium lace, human hair & monofilament wigs.",
+    "items": "{count} items",
+    "all": "All",
+    "human": "Human Hair",
+    "lace": "Lace Front",
+    "monofilament": "Monofilament",
+    "inStockOnly": "In stock",
+    "sortLabel": "Sort",
+    "sortDefault": "Default",
+    "sortPriceLow": "Price: low to high",
+    "sortPriceHigh": "Price: high to low",
+    "sortNameAZ": "Name: A–Z",
+    "sortNameZA": "Name: Z–A",
+    "searchPlaceholder": "Search wigs, lace, monofilament…",
+    "clear": "Clear",
+
   "stock": "In stock",
   "sort": "Sort",
   "default": "Default",
@@ -68,12 +117,47 @@
     "outOfStock": "Out of stock",
     "descriptionTitle": "Product description",
     "reviewsAria": "Customer reviews",
-    "relatedAria": "Related products"
+    "relatedAria": "Related products",
+    "price": "Price",
+    "color": "Color",
+    "selected": "Selected",
+    "quantity": "Quantity",
+    "buyNow": "Buy now",
+    "continueShopping": "Continue shopping",
+    "add": "Add",
+    "description": "Description"
   },
   "productCard": {
     "addToCart": "Add to cart",
     "viewDetails": "View details",
-    "selectColor": "Select color {color}"
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+     "changeColor": "Change color",
+    "selectColorAria": "Select color"
+  },
+  "productDetails": {
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "color": "Color",
+    "selected": "Selected",
+    "selectColorAria": "Select color",
+    "changeColor": "Change color",
+    "quantity": "Quantity",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "addToCart": "Add to cart",
+    "buyNow": "Buy now",
+    "continueShopping": "Continue shopping",
+    "add": "Add"
+  },
+  "productPage": {
+    "keyFeatures": "Key features",
+    "care": "Care",
+    "description": "Description"
+  },
+  "relatedProducts": {
+    "title": "Related products",
+    "subtitle": "You may also like"
   },
   "cartPage": {
     "title": "Your cart",
@@ -133,7 +217,18 @@
   "viewAll": "See all",
   "unavailable": "Reviews unavailable right now.",
   "empty": "No reviews yet.",
-  "emptyHint": "Be the first to review a product after purchase."
+  "emptyHint": "Be the first to review a product after purchase.",
+  "noReviewsYet": "No reviews yet — be the first.",
+    "countLine": "{avg} / 5 • {count} review(s)",
+    "yourName": "Your name",
+    "rating": "Rating",
+    "yourReview": "Your review",
+    "writePlaceholder": "Write your review...",
+    "submit": "Submit review",
+    "sending": "Sending...",
+    "thanks": "Thanks! Your review was added.",
+    "failedLoad": "Failed to load reviews.",
+    "failedSubmit": "Failed to submit review."
 },
 
 

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useCart } from "@/app/context/CartContext";
 import type { Product } from "@/app/data/products";
 
@@ -29,6 +30,8 @@ function imageForColor(product: Product, color: string): string | undefined {
 }
 
 export default function ProductDetailsClient({ product, locale }: Props) {
+  const t = useTranslations("productDetails");
+
   const router = useRouter();
   const { addToCart } = useCart();
 
@@ -56,10 +59,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
     setSelectedColor(c);
     const img = imageForColor(product, c);
 
-    // notify ProductMediaClient (no prop drilling needed)
-    window.dispatchEvent(
-      new CustomEvent(EVENT_NAME, { detail: { color: c, image: img } })
-    );
+    window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: { color: c, image: img } }));
   };
 
   const price = Number(product.price || 0).toFixed(2);
@@ -69,7 +69,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
       {/* Price + Stock */}
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-2xl font-black tracking-tight text-[#363434]">${price}</p>
+          <p className="text-2xl font-black tracking-tight text-[#363434]">€{price}</p>
           <p className="mt-1 text-sm font-semibold text-[#363434]/70">
             {product.capType ? `${product.capType} • ` : ""}
             {product.texture ? product.texture : ""}
@@ -84,7 +84,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
               : "bg-rose-500/10 text-rose-700 ring-1 ring-rose-600/30",
           ].join(" ")}
         >
-          {inStock ? "In stock" : "Out of stock"}
+          {inStock ? t("inStock") : t("outOfStock")}
         </span>
       </div>
 
@@ -92,7 +92,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
       {colors.length > 0 ? (
         <div className="rounded-2xl border border-black/10 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-extrabold text-[#363434]">Color</p>
+            <p className="text-sm font-extrabold text-[#363434]">{t("color")}</p>
 
             {selectedColor ? (
               <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-bold text-[#363434]/80">
@@ -100,7 +100,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
                   className="h-3.5 w-3.5 rounded-full ring-2 ring-black/10"
                   style={{ backgroundColor: isHexColor(selectedColor) ? selectedColor : "#ddd" }}
                 />
-                Selected
+                {t("selected")}
               </span>
             ) : null}
           </div>
@@ -119,7 +119,8 @@ export default function ProductDetailsClient({ product, locale }: Props) {
                     active ? "outline outline-[#dda0dd] outline-offset-2" : "",
                   ].join(" ")}
                   style={{ backgroundColor: isHexColor(c) ? c : "#ddd" }}
-                  aria-label={`Select color ${c}`}
+                  aria-label={`${t("selectColorAria")} ${c}`}
+                  title={t("changeColor")}
                 />
               );
             })}
@@ -129,7 +130,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
 
       {/* Quantity */}
       <div className="rounded-2xl border border-black/10 bg-white p-4 shadow-sm">
-        <p className="text-sm font-extrabold text-[#363434]">Quantity</p>
+        <p className="text-sm font-extrabold text-[#363434]">{t("quantity")}</p>
 
         <div className="mt-3 flex items-center gap-3">
           <button
@@ -137,7 +138,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
             onClick={dec}
             disabled={!inStock}
             className="h-11 w-11 rounded-xl border border-black/10 bg-black/5 text-xl font-black text-[#363434] transition hover:bg-black/10 disabled:cursor-not-allowed disabled:opacity-50"
-            aria-label="Decrease quantity"
+            aria-label={t("decreaseQty")}
           >
             −
           </button>
@@ -147,7 +148,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
             onChange={(e) => setQty(clampQty(e.target.value))}
             inputMode="numeric"
             disabled={!inStock}
-            aria-label="Quantity"
+            aria-label={t("quantity")}
             className="h-11 w-20 rounded-xl border border-black/10 bg-black/5 text-center text-sm font-extrabold text-[#363434] outline-none ring-[#dda0dd]/40 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-50"
           />
 
@@ -156,7 +157,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
             onClick={inc}
             disabled={!inStock}
             className="h-11 w-11 rounded-xl border border-black/10 bg-black/5 text-xl font-black text-[#363434] transition hover:bg-black/10 disabled:cursor-not-allowed disabled:opacity-50"
-            aria-label="Increase quantity"
+            aria-label={t("increaseQty")}
           >
             +
           </button>
@@ -171,7 +172,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
           disabled={!inStock}
           className="w-full rounded-2xl bg-[#dda0dd] px-5 py-3 text-sm font-extrabold text-black shadow-lg shadow-[#dda0dd]/20 transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-4 focus:ring-[#dda0dd]/30 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {inStock ? "Add to cart" : "Out of stock"}
+          {inStock ? t("addToCart") : t("outOfStock")}
         </button>
 
         <button
@@ -180,7 +181,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
           disabled={!inStock}
           className="w-full rounded-2xl border border-black/10 bg-white px-5 py-3 text-sm font-extrabold text-[#363434] shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-black/10 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Buy now
+          {t("buyNow")}
         </button>
       </div>
 
@@ -191,7 +192,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
             href={`/${locale}/shop`}
             className="flex-1 rounded-xl border border-black/10 bg-white px-4 py-3 text-center text-sm font-extrabold text-[#363434] shadow-sm"
           >
-            Continue shopping
+            {t("continueShopping")}
           </Link>
 
           <button
@@ -200,7 +201,7 @@ export default function ProductDetailsClient({ product, locale }: Props) {
             disabled={!inStock}
             className="flex-1 rounded-xl bg-[#dda0dd] px-4 py-3 text-sm font-extrabold text-black disabled:opacity-60"
           >
-            Add
+            {t("add")}
           </button>
         </div>
       </div>

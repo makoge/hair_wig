@@ -52,34 +52,49 @@ export default function HomeClient() {
           </div>
 
           <aside className="rounded-3xl border border-black/10 bg-white p-7 shadow-xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-[#dda0dd]/15 px-4 py-2 text-xs font-extrabold text-[#363434]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#dda0dd]" />
-              Confida Lace Hair
-            </p>
+  <p className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-[#dda0dd]/15 px-4 py-2 text-xs font-extrabold text-[#363434]">
+    <span className="h-1.5 w-1.5 rounded-full bg-[#dda0dd]" />
+    {t("brandName")}
+  </p>
 
-            <h2 className="mt-4 text-3xl font-black leading-tight">{t("beautyTitle")}</h2>
-            <p className="mt-3 text-sm font-semibold leading-6 text-[#363434]/75">
-              {t("beautyDesc")}
-            </p>
+  <h2 className="mt-4 text-3xl font-black leading-tight">
+    {t("beautyTitle")}
+  </h2>
 
-            <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-[#dda0dd]/50 to-transparent" />
+  <p className="mt-3 text-sm font-semibold leading-6 text-[#363434]/75">
+    {t("beautyDesc")}
+  </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {[
-                { title: "Natural look", desc: "Realistic finish & hairline." },
-                { title: "Comfort fit", desc: "Breathable daily wear." },
-                { title: "Fast delivery", desc: "Reliable EU shipping." },
-              ].map((x) => (
-                <div
-                  key={x.title}
-                  className="rounded-2xl border border-black/10 bg-[#363434]/[0.03] p-4"
-                >
-                  <p className="text-sm font-extrabold">{x.title}</p>
-                  <p className="mt-1 text-xs font-semibold text-[#363434]/70">{x.desc}</p>
-                </div>
-              ))}
-            </div>
-          </aside>
+  <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-[#dda0dd]/50 to-transparent" />
+
+  <div className="mt-6 grid gap-3 sm:grid-cols-3">
+    {[
+      {
+        title: t("features.natural.title"),
+        desc: t("features.natural.desc"),
+      },
+      {
+        title: t("features.comfort.title"),
+        desc: t("features.comfort.desc"),
+      },
+      {
+        title: t("features.delivery.title"),
+        desc: t("features.delivery.desc"),
+      },
+    ].map((x) => (
+      <div
+        key={x.title}
+        className="rounded-2xl border border-black/10 bg-[#363434]/[0.03] p-4"
+      >
+        <p className="text-sm font-extrabold">{x.title}</p>
+        <p className="mt-1 text-xs font-semibold text-[#363434]/70">
+          {x.desc}
+        </p>
+      </div>
+    ))}
+  </div>
+</aside>
+
         </div>
       </section>
 

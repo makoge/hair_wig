@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useCart } from "@/app/context/CartContext";
 import type { Product } from "@/app/data/products";
 
@@ -20,6 +20,7 @@ function pickImage(product: Product, color?: string): string {
 
 export default function ProductCard({ product }: Props) {
   const locale = useLocale();
+  const t = useTranslations("productCard");
   const { addToCart } = useCart();
 
   const href = `/${locale}/products/${product.slug}`;
@@ -28,7 +29,6 @@ export default function ProductCard({ product }: Props) {
 
   const colors = useMemo(() => product.colors ?? [], [product.colors]);
 
-  // default color: first color that has a mapped image, else first color, else ""
   const defaultColor = useMemo(() => {
     if (!colors.length) return "";
     const withImg = colors.find((c) => product.colorImages?.[c]);
@@ -36,7 +36,6 @@ export default function ProductCard({ product }: Props) {
   }, [colors, product.colorImages]);
 
   const [selectedColor, setSelectedColor] = useState<string>(defaultColor);
-
   const img = pickImage(product, selectedColor);
 
   const handleAdd = () => {
@@ -64,7 +63,7 @@ export default function ProductCard({ product }: Props) {
               : "border border-red-500/30 bg-red-500/10 text-red-200",
           ].join(" ")}
         >
-          {inStock ? "In stock" : "Out of stock"}
+          {inStock ? t("inStock") : t("outOfStock")}
         </span>
       </div>
 
@@ -108,23 +107,23 @@ export default function ProductCard({ product }: Props) {
                 key={c}
                 type="button"
                 onClick={(e) => {
-                  e.preventDefault(); // don’t trigger Link navigation
+                  e.preventDefault();
                   e.stopPropagation();
                   setSelectedColor(c);
                 }}
                 className={[
                   "h-8 w-8 rounded-full transition",
                   "ring-2 ring-black/10 hover:scale-[1.04] hover:ring-black/20",
-                  active ? "outline  outline-[#dda0dd] outline-offset-2" : "",
+                  active ? "outline outline-[#dda0dd] outline-offset-2" : "",
                 ].join(" ")}
                 style={{ backgroundColor: c }}
-                aria-label={`Select color ${c}`}
-                title="Change color"
+                aria-label={`${t("selectColorAria")} ${c}`}
+
+                title={t("changeColor")}
               />
             );
           })}
 
-          {/* +N more */}
           {colors.length > 6 ? (
             <span className="ml-1 text-xs font-extrabold text-black/60">
               +{colors.length - 6}
@@ -141,17 +140,16 @@ export default function ProductCard({ product }: Props) {
           disabled={!inStock}
           className="w-full rounded-2xl bg-[#dda0dd] py-2.5 text-sm font-extrabold text-black shadow-lg shadow-[#dda0dd]/20 transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-4 focus:ring-[#dda0dd]/30 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Add to cart
+          {t("addToCart")}
         </button>
 
         <Link
           href={href}
           className="w-full rounded-2xl border border-black/10 bg-white py-2.5 text-center text-sm font-extrabold text-black transition hover:-translate-y-0.5 hover:bg-black/5 focus:outline-none focus:ring-4 focus:ring-black/10"
         >
-          View details
+          {t("viewDetails")}
         </Link>
       </div>
     </article>
   );
 }
-

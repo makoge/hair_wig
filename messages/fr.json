@@ -47,7 +47,22 @@
     "shopAccessories": "Acheter des accessoires",
 
     "contactTitle": "Contactez-nous",
-    "imageAlt": "contactez-nous"
+    "imageAlt": "contactez-nous",
+    "brandName": "Confida Lace Hair",
+  "features": {
+    "natural": {
+      "title": "Aspect naturel",
+      "desc": "Finition réaliste et ligne capillaire naturelle."
+    },
+    "comfort": {
+      "title": "Confort optimal",
+      "desc": "Respirant pour un port quotidien."
+    },
+    "delivery": {
+      "title": "Livraison rapide",
+      "desc": "Expédition fiable dans l'UE."
+    }
+  }
   },
 
   "reviews": {
@@ -56,13 +71,55 @@
     "viewAll": "Voir tout",
     "unavailable": "Les avis sont indisponibles pour le moment.",
     "empty": "Pas encore d’avis.",
-    "emptyHint": "Soyez la première à laisser un avis après votre achat."
+    "emptyHint": "Soyez la première à laisser un avis après votre achat.",
+    "noReviewsYet": "Aucun avis — soyez le/la premier(ère).",
+    "countLine": "{avg} / 5 • {count} avis",
+    "yourName": "Votre nom",
+    "rating": "Note",
+    "yourReview": "Votre avis",
+    "writePlaceholder": "Écrivez votre avis…",
+    "submit": "Envoyer l’avis",
+    "sending": "Envoi...",
+    "thanks": "Merci ! Votre avis a été ajouté.",
+    "failedLoad": "Impossible de charger les avis.",
+    "failedSubmit": "Impossible d’envoyer l’avis."
+  },
+  "hero": {
+    "brand": "Confida Lace Hair",
+    "title": "Perruques en cheveux humains & monofilament premium",
+    "description": "Perruques lace front et HD lace de luxe conçues pour une beauté naturelle, confort et confiance.",
+    "shop": "Acheter maintenant",
+    "explore": "Explorer les perruques en cheveux humains",
+
+    "naturalTitle": "Aspect naturel",
+    "naturalDesc": "Lignes capillaires premium & finition réaliste.",
+
+    "comfortTitle": "Confort optimal",
+    "comfortDesc": "Caps respirants pour un port quotidien.",
+
+    "deliveryTitle": "Livraison rapide",
+    "deliveryDesc": "Expédition fiable & assistance.",
+
+    "footerLine": "Perruques premium • Paiement sécurisé • Livraison UE"
   },
 
   "shop": {
   "title": "Boutique Confida",
-  "all": "Tous",
-  "lace": "Lace front",
+    "subtitle": "Perruques premium lace, cheveux humains & monofilament.",
+    "items": "{count} articles",
+    "all": "Tous",
+    "human": "Cheveux humains",
+    "lace": "Lace Front",
+    "monofilament": "Monofilament",
+    "inStockOnly": "En stock",
+    "sortLabel": "Trier",
+    "sortDefault": "Par défaut",
+    "sortPriceLow": "Prix : du moins cher au plus cher",
+    "sortPriceHigh": "Prix : du plus cher au moins cher",
+    "sortNameAZ": "Nom : A–Z",
+    "sortNameZA": "Nom : Z–A",
+    "searchPlaceholder": "Rechercher des perruques, lace, monofilament…",
+    "clear": "Effacer",
   "stock": "En stock",
   "sort": "Trier",
   "default": "Par défaut",
@@ -78,7 +135,15 @@
     "outOfStock": "Rupture de stock",
     "descriptionTitle": "Description du produit",
     "reviewsAria": "Avis des clients",
-    "relatedAria": "Produits similaires"
+    "relatedAria": "Produits similaires",
+    "price": "Prix",
+    "color": "Couleur",
+    "selected": "Sélectionné",
+    "quantity": "Quantité",
+    "buyNow": "Acheter maintenant",
+    "continueShopping": "Continuer vos achats",
+    "add": "Ajouter",
+    "description": "Description"
   },
 
   "contactInfo": {
@@ -87,6 +152,31 @@
     "address": "Adresse",
     "email": "E-mail",
     "imageAlt": "contactez-nous"
+  },
+
+  "productDetails": {
+    "inStock": "En stock",
+    "outOfStock": "Rupture de stock",
+    "color": "Couleur",
+    "selected": "Sélectionné",
+    "selectColorAria": "Choisir la couleur",
+    "changeColor": "Changer la couleur",
+    "quantity": "Quantité",
+    "decreaseQty": "Diminuer la quantité",
+    "increaseQty": "Augmenter la quantité",
+    "addToCart": "Ajouter au panier",
+    "buyNow": "Acheter maintenant",
+    "continueShopping": "Continuer les achats",
+    "add": "Ajouter"
+  },
+  "productPage": {
+    "keyFeatures": "Caractéristiques",
+    "care": "Entretien",
+    "description": "Description"
+  },
+  "relatedProducts": {
+    "title": "Produits similaires",
+    "subtitle": "Vous pourriez aussi aimer"
   },
 
   "cartPage": {
@@ -114,7 +204,10 @@
   "productCard": {
     "addToCart": "Ajouter au panier",
     "viewDetails": "Voir les détails",
-    "selectColor": "Choisir la couleur {color}"
+    "inStock": "En stock",
+    "outOfStock": "Rupture de stock",
+    "changeColor": "Changer la couleur",
+    "selectColorAria": "Choisir la couleur"
   },
 
   "checkout": {
