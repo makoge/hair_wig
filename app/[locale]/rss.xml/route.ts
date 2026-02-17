@@ -1,8 +1,8 @@
-// app/[locale]/rss.xml/route.ts
 import { allPosts } from "contentlayer/generated";
+import type { NextRequest } from "next/server";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://confida.shop";
-type Locale = "en" | "fr";
+const LOCALES = new Set(["en", "fr"]);
 
 function escapeXml(str: string) {
   return str
@@ -14,10 +14,14 @@ function escapeXml(str: string) {
 }
 
 export async function GET(
-  _req: Request,
-  { params }: { params: Promise<{ locale: Locale }> }
+  _req: NextRequest,
+  { params }: { params: Promise<{ locale: string }> }
 ) {
   const { locale } = await params;
+
+  if (!LOCALES.has(locale)) {
+    return new Response("Not found", { status: 404 });
+  }
 
   const posts = allPosts
     .filter((p) => p.locale === locale)
