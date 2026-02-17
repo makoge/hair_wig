@@ -276,7 +276,12 @@
     "ourValues": "Our Values",
     "innovation": "Innovation",
     "support24h": "24 hours support",
-
+     "blogTitle": "Blog",
+    "blogWigEducation": "Wig Education",
+    "blogStylingBeauty": "Styling & Beauty",
+    "blogTransformations": "Transformations",
+    "blogHairLoss": "Hair Loss Solutions",
+    "blogWigTreatment": "Wig Treatment & Care",
     "copyright": "© CONFIDA {year}"
   }
 }

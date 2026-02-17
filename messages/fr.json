@@ -283,7 +283,12 @@
     "ourValues": "Nos valeurs",
     "innovation": "Innovation",
     "support24h": "Support 24h/24",
-
+     "blogTitle": "Blog",
+    "blogWigEducation": "Éducation Perruques",
+    "blogStylingBeauty": "Coiffure & Beauté",
+    "blogTransformations": "Transformations",
+    "blogHairLoss": "Solutions Chute de Cheveux",
+    "blogWigTreatment": "Entretien & Soin",
     "copyright": "© CONFIDA {year}"
   }
 }

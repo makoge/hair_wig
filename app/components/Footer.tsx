@@ -170,37 +170,63 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* 3) About */}
-          <nav aria-label={t("aboutTitle")} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <h4 className="text-base font-extrabold">{t("aboutTitle")}</h4>
+                    {/* 3) Blog (replaces About) */}
+          <nav
+            aria-label={t("blogTitle") ?? "Blog"}
+            className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+          >
+            <h4 className="text-base font-extrabold">
+              {t("blogTitle") ?? "Blog"}
+            </h4>
+
             <ul className="mt-4 space-y-3 text-sm text-white/75">
               <li>
-                <Link className="transition hover:text-white" href={`/${locale}/about`}>
-                  {t("ourValues")}
+                <Link
+                  className="transition hover:text-white"
+                  href={`/${locale}/blog/category/wig-education`}
+                >
+                  {t("blogWigEducation") ?? "Wig Education"}
                 </Link>
               </li>
+
               <li>
-                <Link className="transition hover:text-white" href={`/${locale}/about`}>
-                  {t("innovation")}
+                <Link
+                  className="transition hover:text-white"
+                  href={`/${locale}/blog/category/styling-beauty`}
+                >
+                  {t("blogStylingBeauty") ?? "Styling & Beauty"}
                 </Link>
               </li>
+
               <li>
-                <Link className="transition hover:text-white" href={`/${locale}/contact`}>
-                  {t("support24h")}
+                <Link
+                  className="transition hover:text-white"
+                  href={`/${locale}/blog/category/transformations`}
+                >
+                  {t("blogTransformations") ?? "Transformations"}
                 </Link>
               </li>
+
               <li>
-                <Link className="transition hover:text-white" href={`/${locale}/reviews`}>
-                  {t("customerReviews")}
+                <Link
+                  className="transition hover:text-white"
+                  href={`/${locale}/blog/category/hair-loss-solutions`}
+                >
+                  {t("blogHairLoss") ?? "Hair Loss Solutions"}
                 </Link>
               </li>
+
               <li>
-                <Link className="transition hover:text-white" href={`/${locale}/contact`}>
-                  {t("faq")}
+                <Link
+                  className="transition hover:text-white"
+                  href={`/${locale}/blog/category/wig-treatment`}
+                >
+                  {t("blogWigTreatment") ?? "Wig Treatment & Care"}
                 </Link>
               </li>
             </ul>
           </nav>
+
 
           {/* 4) Legal (better than duplicate About) */}
           <nav aria-label="Legal" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">

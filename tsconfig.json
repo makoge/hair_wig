@@ -21,12 +21,14 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "plugins": [
       {
         "name": "next"
-      }
+      },
+      { "name": "contentlayer" }
     ]
   },
   "include": [
