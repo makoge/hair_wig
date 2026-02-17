@@ -256,17 +256,18 @@ export default function Header() {
               </li>
 
               <li>
-                <Link
-                  href={`/${locale}/treat_wig`}
-                  onClick={() => {
-                    closeMenu();
-                    setLangOpen(false);
-                  }}
-                  className="rounded-lg px-2 py-1 transition hover:text-white"
-                >
-                  {tt("treatWig", "Treat wig")}
-                </Link>
-              </li>
+  <Link
+    href={`/${locale}/tools`}
+    onClick={() => {
+      closeMenu();
+      setLangOpen(false);
+    }}
+    className="rounded-lg px-2 py-1 transition hover:text-white"
+  >
+    {tt("tools", "Tools")}
+  </Link>
+</li>
+
 
               {/* ✅ Removed center-menu Contact link on purpose */}
             </ul>
@@ -501,17 +502,18 @@ export default function Header() {
             </li>
 
             <li>
-              <Link
-                href={`/${locale}/treat_wig`}
-                onClick={() => {
-                  closeMenu();
-                  setLangOpen(false);
-                }}
-                className="block rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10"
-              >
-                {tt("treatWig", "Treat wig")}
-              </Link>
-            </li>
+  <Link
+    href={`/${locale}/tools`}
+    onClick={() => {
+      closeMenu();
+      setLangOpen(false);
+    }}
+    className="block rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10"
+  >
+    {tt("tools", "Tools")}
+  </Link>
+</li>
+
 
             <li>
               <Link

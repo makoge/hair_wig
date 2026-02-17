@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const now = new Date();
 
-  /* ---------------- STATIC PAGES ---------------- */
+  /* ---------------- STATIC CORE ---------------- */
 
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) => [
     {
@@ -23,13 +23,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/${locale}/shop`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/${locale}/blog`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.9, // blog hub is important
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/${locale}/tools`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+  ]);
+
+  /* ---------------- TOOLS ---------------- */
+
+  const toolPages: MetadataRoute.Sitemap = locales.flatMap((locale) => [
+    {
+      url: `${baseUrl}/${locale}/tools/lace-finder`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/${locale}/tools/length-calculator`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
     },
   ]);
 
@@ -44,14 +67,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  /* ---------------- BLOG CATEGORY PAGES ---------------- */
+  /* ---------------- BLOG CATEGORY PILLARS ---------------- */
 
   const categoryPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     Object.keys(CATEGORIES).map((category) => ({
       url: `${baseUrl}/${locale}/blog/category/${category}`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.85, // strong SEO pillar pages
+      priority: 0.85,
     }))
   );
 
@@ -68,11 +91,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
+  /* ---------------- RSS ---------------- */
+
+  const rssPages: MetadataRoute.Sitemap = locales.map((locale) => ({
+    url: `${baseUrl}/${locale}/rss.xml`,
+    lastModified: now,
+    changeFrequency: "daily",
+    priority: 0.4,
+  }));
+
   return [
     ...staticPages,
+    ...toolPages,
     ...productPages,
     ...categoryPages,
     ...blogPages,
+    ...rssPages,
   ];
 }
 
